@@ -20,8 +20,8 @@ $(DOCNAME).pdf: $(tex) meta.tex local.bib  acronyms.tex
 acronyms.tex: $(tex) myacronyms.txt
 	$(TEXMFHOME)/../bin/generateAcronyms.py -t "DM" $(tex)
 
-authors.tex:  authors.yaml
-	$(TEXMFHOME)/../bin/db2authors.py > authors.tex 
+#authors.tex:  authors.yaml
+#	$(TEXMFHOME)/../bin/db2authors.py > authors.tex 
 
 .PHONY: clean
 clean:
