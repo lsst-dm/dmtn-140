@@ -1,0 +1,12 @@
+DMTN-140.pdf
+meta.tex
+acronyms.tex
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.latexmk
+*.fls
+*.xdv
+*.fdb_latexmk

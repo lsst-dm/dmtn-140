@@ -1,4 +1,7 @@
-\documentclass[modern]{aastex62}
+\documentclass[]{spie}
+
+\usepackage[breaklinks,colorlinks,urlcolor=blue,citecolor=blue,linkcolor=blue]{hyperref}
+\usepackage{longtable}
 
 % lsstdoc documentation: https://lsst-texmf.lsst.io/lsstdoc.html
 \input{meta}
@@ -7,17 +10,19 @@
 
 % Local commands go here.
 
+\date{\today}
 
+\input{authors}
+
+\title{Documentation automation for the Verification and Validation of Rubin Observatory Software}
 
 \newcommand{\docRef}{DMTN-140}
 \newcommand{\docUpstreamLocation}{\url{https://github.com/lsst-dm/dmtn-140}}
 
 
 \begin{document}
-\input{authors}
-\date{\today}
-\title{Documentation automation for the Verification and Validation of LSST software}
-\hypersetup{pdftitle={\@title}, pdfauthor={\@author}, pdfkeywords={\@keywords}}
+\maketitle
+%\hypersetup{pdftitle={\@title}, pdfauthor={\@author}, pdfkeywords={\@keywords}}
 
 \input{abstract}
 
@@ -29,7 +34,8 @@
 % Include all the relevant bib files.
 % https://lsst-texmf.lsst.io/lsstdoc.html#bibliographies
 \section{References} \label{sec:bib}
-\bibliographystyle{yahapj}
+%\bibliographystyle{yahapj}
+\bibliographystyle{spiebib}
 \bibliography{local,lsst,lsst-dm,refs_ads,refs,books}
 
 % Make sure lsst-texmf/bin/generateAcronyms.py is in your path
