@@ -21,7 +21,7 @@ achieved by a continuous integration process. This systematic approach substanti
 produce verification and validation documentation, and its integration with the project's System Engineering model, 
 see \cite{10.1117/12.2310125} , ensures full traceability to system requirements.
 
-
+% Should this be moved to after?
 \section{The Documentation Process}
 
 In the scope of Verification and Validation, documents are written using \LaTeX and considered as source code.
@@ -31,7 +31,24 @@ reviewed by a third person before merging to master.
 Using the GitHub \textbf{Pull Request}, it is easy to drive formal reviews, keeping the right contributors informed,
 and ensuring that changes are agreed.
 
+% This is what wraps the information from Jira and puts it in a document 
+% Add the link to the github repo and 
+Docsteady has been developed in-house by LSST DM to address this problem. Expand on this and explain why 
+we developed this. 
 
+
+% Moving this here because this is part of the problem to be solved. The documentation process is part of the solution
+% make this secion smaller and explain the problem andcontext 
+
+% Describe a here a general V&V approach, explain our requirements documents and how they are flowed down from the SRD. DM is responsible to verify requirements that are re
+
+% Leanne to add the graphics from talks and LDM-XXX on the document flowdown. (maybe just the high one) 
+% DM verifies require,ents in DMSR 
+% maybe have a flow down to lower documents
+
+% How do we systematically document the verufication of all the reqirements in this picture in an automated way. 
+
+% GCM to draft a schematic of the approach 
 \section{The Verification and Validation}
 
 The verification and validation approach as illustrated in \cite{10.1117/12.2310125} , has been implemented.
@@ -184,7 +201,7 @@ Having a snapshot of the verification elements in a document, make it possible t
 Approved versions are uploaded in Docushare and used as a reference in other test documents.
 
 
-\section{Information Summary and Control Document}
+\section{Information Summary and the Verification Control Document}
 
 As it has been described in the above section, all Rubin Observatory test information is managed in Jira. 
 This permits to extract very easily the Verification Control Document (VCD), that shows the level of coverage for each requirement.
