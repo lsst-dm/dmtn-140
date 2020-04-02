@@ -2,9 +2,7 @@
 
 The Rubin Observatory Data Management System (DM), as described in~\cite{2015arXiv151207914J} ,
 is responsible for creating the software, services, and systems that will be used to
-produce the observatory's science-ready data products. The software, currently under development, is heterogeneous,
-comprising both C++ and Python components, and is designed to facilitate both the processing of LSST images
-and to enable value-added contributions from the broader scientific community. Project requirements on DM
+produce the observatory's science-ready data products.  Project requirements on DM
 products are documented in change-controlled specifications. DM Verification and Validation activities are planned
 to guarantee that survey software and infrastructure both fulfill the system requirements and enable the science that
 motivates the project.
@@ -21,25 +19,36 @@ achieved by a continuous integration process. This systematic approach substanti
 produce verification and validation documentation, and its integration with the project's System Engineering model, 
 see \cite{10.1117/12.2310125} , ensures full traceability to system requirements.
 
-% Should this be moved to after?
-\section{The Documentation Process}
+\section{The Verification and Validation Problem}
 
-In the scope of Verification and Validation, documents are written using \LaTeX and considered as source code.
-Each document has a Git repository, where each edit is driven by a Jira issue, implemented in a ticket branch, 
-reviewed by a third person before merging to master.
+The main scope of the verification and validation activity is to ensure that all requirements have been properly implemented and verified.
+This implies identify the requirements, the affected components and the verification procedures.
 
-Using the GitHub \textbf{Pull Request}, it is easy to drive formal reviews, keeping the right contributors informed,
-and ensuring that changes are agreed.
+The Data Management requirements are baselined in the \textit{Data Management (DMS) Requirement Specification}\cite{LSE-61}, also know as DMSR.
+The DMS requirements are flow down from the SRD, the \textit{LSST System Science Requirements Document} \cite{LPM-17}~. 
+Interface requirements between DM and other LSST subsystems, have also an impact on Data Management provided components, 
+and therefore need to be considered during Verification and Validation. 
+The figure \ref{fig:topdoctree} shows the high level requirements documents flow down.
 
-% This is what wraps the information from Jira and puts it in a document 
-% Add the link to the github repo and 
-Docsteady has been developed in-house by LSST DM to address this problem. Expand on this and explain why 
-we developed this. 
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{imgs/TopLevelDocTree.png}
+ \caption{The Rubin Observatory top level document tree.}
+ \label{fig:topdoctree}
+\end{center}
+\end{figure}
 
+DM is responsible to fully verify the DMSR requirements and to contribute to the verification and validation of the interface requirements that have an impact on the subsystem.
+We guarantee this creating verification elements associated with each requirement, 4 for the DMSR requirements and 2 for the interface requirements.
+Those verification elements are assigned to the validation scientist, 
+that will ensure they are properly described and sufficient to fully verify the corresponding requirements. 
+The validation scientist will ensure that for each verification element there is at least a test case.
+In the case that the provided verification elements are not sufficient, the validation scientist will request more verification elements to be associated with the requirement.
+In the opposite case, if a provided verification element is not needed, it will be removed.
 
-% Moving this here because this is part of the problem to be solved. The documentation process is part of the solution
-% make this secion smaller and explain the problem andcontext 
-
+The verification activity will be done in order to fulfill test milestones, defined at project level.
+For each milestone, a test campaign will be setup. 
+Test executions are collected in test reports and coverage information is propagated back to Verification Elements and Requirements.
 % Describe a here a general V&V approach, explain our requirements documents and how they are flowed down from the SRD. DM is responsible to verify requirements that are re
 
 % Leanne to add the graphics from talks and LDM-XXX on the document flowdown. (maybe just the high one) 
@@ -49,7 +58,7 @@ we developed this.
 % How do we systematically document the verufication of all the reqirements in this picture in an automated way. 
 
 % GCM to draft a schematic of the approach 
-\section{The Verification and Validation}
+\section{The Verification and Validation Infrastructure}
 
 The verification and validation approach as illustrated in \cite{10.1117/12.2310125} , has been implemented.
 Required tools have been put in place, like \textit{Syndeia} and \textit{Docsteady}.
@@ -57,38 +66,50 @@ Required tools have been put in place, like \textit{Syndeia} and \textit{Docstea
 
 \subsection{Tools}
 
-Follows the description of the tools we are using, of the procedure followed and the automatic generation of the test documents.
+In this section it i given a short description for each tool involved in the Verification and Validation activity.
+The figure \ref{fig:vandvtools} gives a schematic overview.
 
-\paragraph{GitHub}:
-It host the document content, and consider it as source code. It also provides metadata, like date, revision numbers and tags.
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{imgs/VandVtools.png}
+ \caption{Schematic overview of the tools involved in the V\&V process.}
+ \label{fig:vandvtools}
+\end{center}
+\end{figure}
 
-\paragraph{Travis}:
-It is the continuous integration tool integrated with GitHub.
-In the case of documents, Travis is configured in such a way that, when a change in the repository happens, 
-it triggers the build of the pdf and publish it to the corresponding lsst.io page.
+\paragraph{MagicDraw}
+It is the Rubin Observatory Modeling tool. It is used for requirement management. The Verification Elements are created
+in MagicDraw and then synchronized to and from Jira using \textbf{Syndeia}. This ensures that the proper 
+traceability between requirements and verification elements is in place.
 
-\paragraph{lsst.io}:
+\paragraph{Jira}
+The Rubin Observatory issue tracking system.
+The Adaptavist Test Manager plugin (ATM) provides additional functionalities to Jira to manage test activities.
+Jira is hosting all test information, providing an easy to use graphic interface, where the scientist can provide all test information.
+
+\paragraph{Syndeia}
+It is the tool that integrates MagicDraw and Jira. The Verification Elements, first created in MagicDraw,
+are synched in Jira. After the test activity is completed, the information will be synched back to MagicDraw.
+
+\paragraph{Docsteady}
+It is the tool that permits the generation of the test documents, extracting the information from Jira using REST API.
+It can be executed manually or automatically, generating the documentes in \LaTeX format.
+It can be scheduled using a continuous integration tool like for example Jenkins, making possible that 
+the documents are generated continuously.
+The extracted documents are managed using Git repositories, and follows the  standard LSST document flow.
+
+\paragraph{GitHub}
+It is the platform for software version management.
+Verification and Validation documents are written in Latex and maintained in git repositories.
+Each time a change is made in the document, a new pdf is build automatically and made available in the \textbf{lsst.io} landing page.
+
+\paragraph{lsst.io}
+    The documentation portal for LSST, see \textit{The LSST the Docs Platform for Continuous Documentation Delivery}\cite{SQR-006}~.
 Each document has a lsst.io publication page, where the pdf is pushed by Travis, after each successful build.
-This makes very easy to share the documents in different version, like for example tags or branches.
 
 \paragraph{Docushare}:
 It is the official Rubin Observatory documentation repository during construction.
 Documents are uploaded in Docushare only after their formal approval.
-
-\paragraph{Jira}:
-The Rubin Observatory issue tracking system.
-The Adaptavist Test Manager plugin (ATM) provides additional functionalities to Jira to manage test activities.
-
-\paragraph{DocSteady}:
-It is the tool that permits the generation of the test documents, extracting the information from Jira using REST API.
-
-\paragraph{MagicDraw}:
-It is the Rubin Observatory Modeling tool. It is used for requirement management. Verification Elements are created
-in MagicDraw and then synchronized to and from Jira.
-
-\paragraph{Syndeia}
-It is the tool that permits the integration between MagicDraw and Jira. The Verification Elements, first created in MagicDraw,
-are synched in Jira. After the test activity is completed, the information will be synched back to MagicDraw.
 
 
 \subsection{Procedures}
@@ -120,8 +141,7 @@ Verification elements and test cases are baselined in corresponding documents, i
 
 \subsubsection{Planning and Execution}
 
-Test campaigns are scheduled following defined milestones at project level, that are outside the scope of this document.
-Extra test campaigns may be scheduled on a per need base.
+Test campaigns are scheduled following defined milestones at project level or on a per need base.
 
 For each test campaign, two Jira ATM objects have to be created at least:
 
@@ -158,12 +178,12 @@ Also it possible to related to the test execution any Jira issue documenting pro
 
 All this information is extracted in a report document.
 In order to avoid the proliferation of documents, the  report information is added to the \textit{Test Plan} created in the previous fare.
-The document is therefore renamed as \textbf{Test Plan and Report}.
+The document is therefore called as \textbf{Test Plan and Report}.
 
 Once the test execution is completed, an overall assessment shall be provided in the ATM Test Plan.
 
 The document generation will provide a readable version of the document including all test information.
-Stakeholder are able to to review the outcome of the test campaign using the same PR mechanism reported above, 
+Stakeholder can review the outcome of the test campaign using the same PR mechanism reported above, 
 commenting, asking for more information or changes if required, and finally, when consensus is reached, approve the test campaign result.
 
 At the end of the test campaign, the Test Plan and Report is issued and uploaded to Docushare.
@@ -201,7 +221,7 @@ Having a snapshot of the verification elements in a document, make it possible t
 Approved versions are uploaded in Docushare and used as a reference in other test documents.
 
 
-\section{Information Summary and the Verification Control Document}
+\section{The Verification Control Document}
 
 As it has been described in the above section, all Rubin Observatory test information is managed in Jira. 
 This permits to extract very easily the Verification Control Document (VCD), that shows the level of coverage for each requirement.
@@ -224,9 +244,38 @@ and the status of the test cases. Links to the test documents are provided, but 
 The VCD become an important document for management to know the level of verification and validation that has been achieved so far.
 At the same time it can be provided to reviews in order to demonstrate that the expected milestones have been met.
 
+
+% Should this be moved to after? -- moved (too down in the doc?)
+\section{The Rubin Documentation Process}
+
+In the scope of Verification and Validation, documents are written using \LaTeX and considered as source code.
+Each document has a Git repository, where each edit is driven by a Jira issue, implemented in a ticket branch, 
+reviewed by a third person before merging to master.
+
+Using the GitHub \textbf{Pull Request}, it is easy to drive formal reviews, keeping the right contributors informed,
+and ensuring that changes are agreed.
+
+% This is what wraps the information from Jira and puts it in a document 
+% Add the link to the github repo and 
+Docsteady has been developed in-house by LSST DM to address this problem. Expand on this and explain why 
+we developed this. 
+
+% Moving this here because this is part of the problem to be solved. The documentation process is part of the solution
+% make this secion smaller and explain the problem andcontext 
+
+
 \section{Conclusions and Outlook}
 
+The provided infrastructure, facilitate the Verification and Validation activities in all their phases.
+The user can concentrate on the important aspects of the activity, ensuring that the requriements are properly verified.
 
+Jira provides an easy to use interface, it is very quick to access the test case to update or tu report on, without the need of diging in huge test document.
+The authomatic generation of the document from the other side, make the test information available in a standard format.
+
+Finally, we are able to collect all information in a single document showing that all the requirements are properly covered,
+pointing to the baselined documents where details on the test activities are provided.
+
+This is done reducing to the minimum the time requested to the scientific team.
 
 
 
