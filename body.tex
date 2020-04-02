@@ -1,13 +1,13 @@
 \section{Introduction}
 
-The Rubin Observatory Data Management System (DM), as described in~\cite{2015arXiv151207914J} ,
+The Rubin Observatory Data Management System, as described in \textit{Juric et al}\cite{2015arXiv151207914J},
 is responsible for creating the software, services, and systems that will be used to
 produce the observatory's science-ready data products.  Project requirements on DM
 products are documented in change-controlled specifications. DM Verification and Validation activities are planned
 to guarantee that survey software and infrastructure both fulfill the system requirements and enable the science that
 motivates the project.
 
-In line with the verification approach adopted for the Gaia DPAC project, described in in \cite{10.1117/12.926797} , 
+In line with the verification approach adopted for the Gaia DPAC project, described in in \textit{Comoretto et al}\cite{10.1117/12.926797}, 
 we present here the tooling and procedures used at Rubin Observatory for the documentation of verification and
 validation activities. Test activities are managed in Jira, where test cases are created and updated, and test results
 are reported. This ensures that all elements to be documented are available in one tool, that maintains a history of
@@ -17,16 +17,17 @@ such as a lack of traceability, misspelling, duplication of content, and misalig
 centralized collection of information permits a high level of automation, where the extraction of test documents is
 achieved by a continuous integration process. This systematic approach substantially reduces the time required to
 produce verification and validation documentation, and its integration with the project's System Engineering model, 
-see \cite{10.1117/12.2310125} , ensures full traceability to system requirements.
+see \textit{Selvy et al}\cite{10.1117/12.2310125}, ensures full traceability to system requirements.
+
 
 \section{The Verification and Validation Problem}
 
 The main scope of the verification and validation activity is to ensure that all requirements have been properly implemented and verified.
-This implies identify the requirements, the affected components and the verification procedures.
+This includes identifying the requirements, the affected components and the verification procedures.
 
-The Data Management requirements are baselined in the \textit{Data Management (DMS) Requirement Specification}\cite{LSE-61}, also know as DMSR.
-The DMS requirements are flow down from the SRD, the \textit{LSST System Science Requirements Document} \cite{LPM-17}~. 
-Interface requirements between DM and other LSST subsystems, have also an impact on Data Management provided components, 
+The Data Management requirements are baselined in the \textit{Data Management Requirement Specification}\cite{LSE-61}, also know as DMSR.
+The DMS requirements are flowed down from the SRD, the \textit{LSST System Science Requirements Document} \cite{LPM-17}. 
+Interface requirements between DM and other LSST subsystems also have an impact on Data Management provided components, 
 and therefore need to be considered during Verification and Validation. 
 The figure \ref{fig:topdoctree} shows the high level requirements documents flow down.
 
@@ -39,9 +40,9 @@ The figure \ref{fig:topdoctree} shows the high level requirements documents flow
 \end{figure}
 
 DM is responsible to fully verify the DMSR requirements and to contribute to the verification and validation of the interface requirements that have an impact on the subsystem.
-We guarantee this creating verification elements associated with each requirement, 4 for the DMSR requirements and 2 for the interface requirements.
+We guarantee this by creating verification elements associated with each requirement, 4 for the DMSR requirements and 2 for the interface requirements.
 Those verification elements are assigned to the validation scientist, 
-that will ensure they are properly described and sufficient to fully verify the corresponding requirements. 
+who will ensure they are properly described and sufficient to fully verify the corresponding requirements. 
 The validation scientist will ensure that for each verification element there is at least a test case.
 In the case that the provided verification elements are not sufficient, the validation scientist will request more verification elements to be associated with the requirement.
 In the opposite case, if a provided verification element is not needed, it will be removed.
@@ -66,8 +67,8 @@ Required tools have been put in place, like \textit{Syndeia} and \textit{Docstea
 
 \subsection{Tools}
 
-In this section it i given a short description for each tool involved in the Verification and Validation activity.
-The figure \ref{fig:vandvtools} gives a schematic overview.
+In this section we give a short description for each tool involved in the Verification and Validation activity.
+Figure \ref{fig:vandvtools} gives a schematic overview.
 
 \begin{figure}
 \begin{center}
@@ -78,37 +79,38 @@ The figure \ref{fig:vandvtools} gives a schematic overview.
 \end{figure}
 
 \paragraph{MagicDraw}
-It is the Rubin Observatory Modeling tool. It is used for requirement management. The Verification Elements are created
+is the Rubin Observatory Modeling tool. It is used for requirement management. The Verification Elements are created
 in MagicDraw and then synchronized to and from Jira using \textbf{Syndeia}. This ensures that the proper 
-traceability between requirements and verification elements is in place.
+traceability between requirements and verification elements is in place, and that changes in one part of the system can be propagated through other components.
 
 \paragraph{Jira}
-The Rubin Observatory issue tracking system.
+is the Rubin Observatory issue tracking system.
 The Adaptavist Test Manager plugin (ATM) provides additional functionalities to Jira to manage test activities.
 Jira is hosting all test information, providing an easy to use graphic interface, where the scientist can provide all test information.
 
 \paragraph{Syndeia}
-It is the tool that integrates MagicDraw and Jira. The Verification Elements, first created in MagicDraw,
+is a third party, provided by tool that integrates MagicDraw and Jira. The Verification Elements, first created in MagicDraw,
 are synched in Jira. After the test activity is completed, the information will be synched back to MagicDraw.
 
 \paragraph{Docsteady}
-It is the tool that permits the generation of the test documents, extracting the information from Jira using REST API.
-It can be executed manually or automatically, generating the documentes in \LaTeX format.
+is the tool that permits generation of the test documents, extracting the information from Jira using REST API.
+It can be executed manually or automatically, generating the documents in \LaTeX format.
 It can be scheduled using a continuous integration tool like for example Jenkins, making possible that 
 the documents are generated continuously.
 The extracted documents are managed using Git repositories, and follows the  standard LSST document flow.
+Docsteady is developed internally at LSST and the source code is available at \url{https://github.com/lsst-dm/docsteady}.
 
 \paragraph{GitHub}
-It is the platform for software version management.
+is the platform for software version management.
 Verification and Validation documents are written in Latex and maintained in git repositories.
-Each time a change is made in the document, a new pdf is build automatically and made available in the \textbf{lsst.io} landing page.
+Each time a change is made in the document, a new pdf is built automatically and made available in the \textbf{lsst.io} landing page.
 
 \paragraph{lsst.io}
-    The documentation portal for LSST, see \textit{The LSST the Docs Platform for Continuous Documentation Delivery}\cite{SQR-006}~.
+is the documentation portal for LSST, see \textit{The LSST the Docs Platform for Continuous Documentation Delivery}\cite{SQR-006}~.
 Each document has a lsst.io publication page, where the pdf is pushed by Travis, after each successful build.
 
-\paragraph{Docushare}:
-It is the official Rubin Observatory documentation repository during construction.
+\paragraph{Docushare}
+is the official Rubin Observatory documentation repository during construction.
 Documents are uploaded in Docushare only after their formal approval.
 
 
@@ -116,50 +118,49 @@ Documents are uploaded in Docushare only after their formal approval.
 
 The Verification and Validation activities originate from the requirements.
 We assume in this document, that the requirements have been properly formalized, documented and approved.
-
-For each requirement in MagicDraw, one or more verification elements are created.
+We assume also, that for each requirement in MagicDraw, one or more verification elements are created.
 When first created, the verification elements have no description. The only information they have is the requirement from where they have been generated.
-
 They are synched to Jira using Syndeia, where they can be assigned to a responsible and completed with the relevant information.
 
 \textit{[add picture?]}
 
 
-\subsubsection{Test Procedures Preparation}
+\subsubsection{Verification Elements Analysis}
 
-After the verification elements have been created and propagated to Jira, they are assigned depending on the team or
-component they belong to.
-The assignee has the task to provide the right scope of the verification element and create the corresponding test cases.
-The verification elements are addressing all the aspects of a  requirement, that need to be verified.
-Verification Elements are organized per component, like for example \textit{DM}, and sub-component, like for example \textit{Network}. 
+The first activity, required before starting with any test campaign, is to ensure that each verification elements is cometed with the relevant information.
+This is done by the validation scientist, or delegated.
 
-The test case associated with a verification element are assigned to an \textbf{owner},  that will complete it giving description,
- scope and, test procedure and other relevant information depending on the cases.
+As a result of the analysis, the verification element will have a description, that describes the scope, the part of the requirement that needs to be verified.
+Also, the verification element will be related with one or more test cases draft, which are just defined with a one sentence objective and an owner.
+Each test case is in this way automatically traced to a verification element and therefore to a requirement.
 
-Verification elements and test cases are baselined in corresponding documents, in order to guarantee traceability and correctness of them.
+\subsubsection{Test Cases Preparation}
 
+The owner of each test case is in charge of complete it at the best of its knowledge, including a draft test steps procedure.
+In the future when the test case is instantiate for a test campaign, a small adjustment will be required,
+Additional test cases can be created, and related to one or more requirement, depending on the needs.
 
 \subsubsection{Planning and Execution}
 
-Test campaigns are scheduled following defined milestones at project level or on a per need base.
+As we mentioned in the introduction, the test activities are organized following project milestones.
 
 For each test campaign, two Jira ATM objects have to be created at least:
 
 \begin{itemize}
 \item \textbf{Jira ATM Test Plan} that provides the context of the test activity, and usually corresponds to a milestone.
-\item \textbf{Jira AATM Test Cycle}(s) that provides the scope. For each test campaign we may have multiple test cycles, 
+\item \textbf{Jira ATM Test Cycle}(s) that provides the scope. For each test campaign we may have multiple test cycles, 
 depending on the different configurations, datasets, or extra conditions we may want to test. The Test Cycles are traced
 to the Test Plan, and provides the list of test cases that need to be executed.
 \end{itemize}
 
-We can identify two phase:
+For each test campaign we identify two phase:
 
 \paragraph{Planning}:
 It is the phase when the test campaign is prepared. All relevant information shall be collected in the Jira ATM Test Plan and 
 Test Cycle(s). 
 At the end of this phase we shall be able to say: \textbf{the test is ready to start}.
 Despite in the Rubin Observatory there are no formal Test Readiness Review for each test campaign, 
-the tooling and procedures in place permit to who is reposnsible of the test activity and relevant stakeholders, to assess and review the collected information. 
+the tooling and procedures in place permit to who is reponsible of the test activity and relevant stakeholders, to assess and review the collected information. 
 This is done extracting the information into a document, the \textit{Test Plan}, in GitHub, generating the pdf and making it available
 in the corresponding lsst.io landing page. Contributors, reviewers and stakeholders can access easily the produced pdf,
 check the content of the test plan and comment, ask for clarification, or changes, using the GitHub
@@ -246,19 +247,19 @@ At the same time it can be provided to reviews in order to demonstrate that the 
 
 
 % Should this be moved to after? -- moved (too down in the doc?)
-\section{The Rubin Documentation Process}
+%\section{The Rubin Documentation Process}
 
-In the scope of Verification and Validation, documents are written using \LaTeX and considered as source code.
-Each document has a Git repository, where each edit is driven by a Jira issue, implemented in a ticket branch, 
-reviewed by a third person before merging to master.
+%In the scope of Verification and Validation, documents are written using \LaTeX and considered as source code.
+%Each document has a Git repository, where each edit is driven by a Jira issue, implemented in a ticket branch, 
+%reviewed by a third person before merging to master.
 
-Using the GitHub \textbf{Pull Request}, it is easy to drive formal reviews, keeping the right contributors informed,
-and ensuring that changes are agreed.
+%Using the GitHub \textbf{Pull Request}, it is easy to drive formal reviews, keeping the right contributors informed,
+%and ensuring that changes are agreed.
 
 % This is what wraps the information from Jira and puts it in a document 
 % Add the link to the github repo and 
-Docsteady has been developed in-house by LSST DM to address this problem. Expand on this and explain why 
-we developed this. 
+%Docsteady has been developed in-house by LSST DM to address this problem. Expand on this and explain why 
+%we developed this. 
 
 % Moving this here because this is part of the problem to be solved. The documentation process is part of the solution
 % make this secion smaller and explain the problem andcontext 
@@ -266,16 +267,19 @@ we developed this.
 
 \section{Conclusions and Outlook}
 
-The provided infrastructure, facilitate the Verification and Validation activities in all their phases.
-The user can concentrate on the important aspects of the activity, ensuring that the requriements are properly verified.
+The described approach, integrated in the LSST infrastructure, with the addition of the custom tools Docsteady and Syndeia, 
+ensures a smooth approach to the validation and verification activity. 
 
-Jira provides an easy to use interface, it is very quick to access the test case to update or tu report on, without the need of diging in huge test document.
-The authomatic generation of the document from the other side, make the test information available in a standard format.
+Traceability between the large amount of requirements, and all the test objects is guaranteed by the tooling.
 
-Finally, we are able to collect all information in a single document showing that all the requirements are properly covered,
-pointing to the baselined documents where details on the test activities are provided.
+Using Jira, ensures an easy way to add test information, edit and reuse test cases.
+Automation and continuous integration/deployment of the documents make test information much more accessible to users and for internal reviews.
+This reduce the time required for producing the documents, and permit the team to concentrate to the relevant test activities, maximizing in this way the scientific outcome.
 
-This is done reducing to the minimum the time requested to the scientific team.
+Finally, the verification control document provide a global overview on all DM requirements, ensuring we are not forgetting anything.
+
+This approach is not only use by DM, but also by other LSST subsystems, that are facing the same challenge.
+Using the same tools permit everybody tu use the same template and have the same documentation format across the project.
 
 
 
