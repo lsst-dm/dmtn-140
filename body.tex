@@ -59,18 +59,19 @@ Test documents, including test reports, are generated automatically from Jira.
  \label{fig:vandvschema}
 \end{center}
 \end{figure}
+
+The approach ensures that all elements of the verification and validation activity are related each other, and all are available in Jira.
+Figure \ref{fig:vandvschema} shows the relation between each of them.
+This ensures traceability, and makes possible to extract the information in the test documents, without the need of manual intervention.
 % Describe a here a general V&V approach, explain our requirements documents and how they are flowed down from the SRD. DM is responsible to verify requirements that are re
 
 % How do we systematically document the verufication of all the reqirements in this picture in an automated way. 
 
 % GCM to draft a schematic of the approach 
-\section{The Verification and Validation Infrastructure}
+\section{The Verification and Validation Tools}
 
 The verification and validation approach as illustrated in \cite{10.1117/12.2310125}  has been implemented.
 Required tools have been put in place, like \textit{Syndeia} and \textit{Docsteady}.
-
-
-\subsection{Tools}
 
 In this section we give a short description for each tool involved in the Verification and Validation activity.
 Figure \ref{fig:vandvtools} gives a schematic overview.
@@ -119,13 +120,14 @@ is the official Rubin Observatory documentation repository during construction.
 Documents are uploaded in Docushare only after their formal approval.
 
 
-\subsection{Procedures}
+\subsection{Process Overview}
 
 The Verification and Validation activities originate from the requirements.
 We assume in this document, that the requirements have been properly formalized, documented and approved.
 As described early in this paper, a defined number of verification elements is created for each requirement.
 When first created, the verification elements have no description. The only information they have is the requirement from where they have been generated.
 They are synched to Jira using Syndeia, where the validation scientist ensures that they are properly addressed.
+Figure  \ref{fig:vandvtools} gives a graphical overview of the process.
 
 \begin{figure}
 \begin{center}
@@ -135,23 +137,27 @@ They are synched to Jira using Syndeia, where the validation scientist ensures t
 \end{center}
 \end{figure}
 
+The following subsections describe the main steps of the verification and validation activities.
+
 
 \subsubsection{Verification Elements Analysis}
 
-The first activity, required before starting with any test campaign, is to ensure that each verification elements is cometed with the relevant information.
+The first activity, required before starting with any test campaign, is to ensure that each verification elements is completed with the relevant information.
 This is done by the validation scientist, or delegated.
 
-As a result of the analysis, the verification element will have a description, that describes the scope, the part of the requirement that needs to be verified.
+As a result of the analysis, the verification element will have a description, that describes its scope: the part of the requirement that needs to be verified.
 Also, the verification element will be related with one or more test cases draft, which are just defined with a one sentence objective and an owner.
 Each test case is in this way automatically traced to a verification element and therefore to a requirement.
 
+Verification Elements are baselined in a \textit{Verification Baseline Document}.
 
 \subsubsection{Test Cases Consolidation}
 
-The owner of each test case is in charge of complete it at the best of its knowledge, including a draft test steps procedure.
+The owner of each test case is in charge to complete it at the best of its knowledge, including a draft test steps procedure.
 In the future when the test case is instantiate for a test campaign, a small adjustment will be required,
 Additional test cases can be created, and related to one or more requirement, depending on the needs.
 
+Test Cases are baselined in \textit{Test Specifications}.
 
 \subsubsection{Planning and Execution}
 
@@ -178,27 +184,28 @@ This is done extracting the information into a document, the \textit{Test Plan},
 in the corresponding lsst.io landing page. Contributors, reviewers and stakeholders can access easily the produced pdf,
 check the content of the test plan and comment, ask for clarification, or changes, using the GitHub
 Pull Request (PR) mechanism or the corresponding Jira issue.
-When agreement on the test plan content has been reached, the ATM test plan status is changed to \textbf{approved}. The test activity is ready to start.
+When agreement on the test plan content has been reached, the ATM test plan status is changed to \textbf{Approved}. The test activity is ready to start.
 
-The outcome of this first phase is an approved test plan to be uploaded in Docushare. 
+The outcome of this first phase is an approved test plan document to be uploaded in Docushare. 
 The document at this stage provides the agreed test procedures and all the necessary information required to execute the tests.
-The Github repository will be tagged with the corresponding issue number \textit{v1.0}.
+The GitHub repository will be tagged with the corresponding issue number \textit{v1.0}.
 
 \paragraph{Execution}:
-In this phase, the testers identified in the the test plan are in charge to execute the test procedures and 
+In this phase, the testers, identified in the the previous test plan phase, are in charge to execute the test procedures and 
 document the result of each steps in Jira ATM.
-The ATM plugin provide a test player view, where for each step in each test case, it is possible to say, it it has been executed successfully or not.
-Also it possible to related to the test execution any Jira issue documenting problems raised during the execution.
+The ATM plugin provide a test player view, where for each step in each test case, it is possible to say if it has been executed successfully or not,
+specify the result of the step and relate any Jira issue that has been found during the test execution.
 
 All this information is extracted in a report document.
 In order to avoid the proliferation of documents, the  report information is added to the \textit{Test Plan} created in the previous fare.
-The document is therefore called as \textbf{Test Plan and Report}.
+The document is therefore called \textbf{Test Plan and Report}.
 
 Once the test execution is completed, an overall assessment shall be provided in the ATM Test Plan.
 
-The document generation will provide a readable version of the document including all test information.
+As done in the previous phase, the document generated automatically from Jira provides an easy way to access the test information.
 Stakeholder can review the outcome of the test campaign using the same PR mechanism reported above, 
 commenting, asking for more information or changes if required, and finally, when consensus is reached, approve the test campaign result.
+The Jira ATM test plat status will be changed to \textbf{Done}.
 
 At the end of the test campaign, the Test Plan and Report is issued and uploaded to Docushare.
 The Github repository is tagged with the new issue number, \textit{v2.0}.
@@ -208,75 +215,64 @@ The Github repository is tagged with the new issue number, \textit{v2.0}.
 
 Based on the process just outlined above, the following documents are identified.
 
-These documents are generated using the \textbf{Docsteady}.
+These documents identified in the above steps are generated using the \textbf{Docsteady}.
 The generation can be done manually, or automatically.
-Authomation is particularly useful in case we want to see every day the progress of the previous day published in the lsst.io landing page.
+Automation is particularly useful in case we want to see every day the progress of the previous day published in the lsst.io landing page.
 
-The extraction tool, Docsteady, permits to the user to concentrate only on the test activities,
-forgetting any documentation aspect.
+The extraction tool, permits to the user to concentrate only on the relevant test activities, whitout the need to worry about any documentation aspect.
+Follows a summary of the test document:
 
-
-\subsubsection{Test Specification}
-
-The Test Specification is a document that baseline the test cases defined on a specific component.
-
-
-\subsubsection{Test Plan and Report}
-
-The Test Plan and Report include all planning and execution information. 
-The document  is issued in two times. The first issue corresponds to the consolidation of the planning activity, 
-the second to the finalized test campaign.
-
-
-\subsubsection{Verification Elements Baseline}
-
-This document provides a snapshot of the verification elements, which content is maintained in Jira issues, therefore it is very easy to change.
+\begin{itemize}
+\item \textbf{Test Specification}: is a document that baseline the test cases defined on a specific component.
+\item \textbf{Test Plan and Report}: is a document that includes all planning and execution information. 
+It  is issued in two times. The first issue corresponds to the consolidation of the planning activity,  the second to the finalized test campaign.
+\item \textbf{Verification Elements Baseline}: is a document that provides an snapshot of the verification elements,
+ which content is maintained in Jira issues, therefore it is very easy to change.
 Having a snapshot of the verification elements in a document, make it possible to assess them, approve and keep history.
 Approved versions are uploaded in Docushare and used as a reference in other test documents.
+\end{itemize}
 
 
 \section{The Verification Control Document}
 
 As it has been described in the above section, all Rubin Observatory test information is managed in Jira. 
-This permits to extract very easily the Verification Control Document (VCD), that shows the level of coverage for each requirement.
+This permits very easily to extract the Verification Control Document (VCD), where we can see the level of coverage for each requirement.
 
 The VCD is a latex document generated using the document generation tool Docsteady. 
-It is managed in the same way as the Test Plan and Report, the latex code is managed in Github,
+It is managed in the same way as the others test documents, the latex code is managed in Github,
 built in Travis and published in lsst.io.
 
-Since the number of requirement for the Rubin Observatory is very high, the VCD is generated per subsystem.
-
-The VCD provides 2 main sections:
+Since the number of requirement and verification elements for the Rubin Observatory is very high, 
+approximately 700 requirements and 1000 verification elements only in DM, the VCD is generated per subsystem.
+There are 2 main sections in the document:
 
 \begin{itemize}
 \item \textbf{Summary Information} where a status overview is given. 
-This includes the number of requirements and verification elements related to passed or failed test cases.
+This includes the number of requirements and verification elements covered by passed test cases.
+Figure \ref{fig:vcdsum} shows an example extracted from DM.
 \item \textbf{Detailed Information} where for each requirement it is shown which are the verification elements and test cases
 and the status of the test cases. Links to the test documents are provided, but not descriptive information.
+Figure \ref{fig:vcddetail} shows a detail example extracted from the DM VCD.
 \end{itemize}
 
 The VCD become an important document for management to know the level of verification and validation that has been achieved so far.
 At the same time it can be provided to reviews in order to demonstrate that the expected milestones have been met.
 
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{imgs/VCDsumm.png}
+ \caption{Summary example extracted from the DM VCD.}
+ \label{fig:vcdsum}
+\end{center}
+\end{figure}
 
-% Should this be moved to after? -- moved (too down in the doc?)
-%\section{The Rubin Documentation Process}
-
-%In the scope of Verification and Validation, documents are written using \LaTeX and considered as source code.
-%Each document has a Git repository, where each edit is driven by a Jira issue, implemented in a ticket branch, 
-%reviewed by a third person before merging to master.
-
-%Using the GitHub \textbf{Pull Request}, it is easy to drive formal reviews, keeping the right contributors informed,
-%and ensuring that changes are agreed.
-
-% This is what wraps the information from Jira and puts it in a document 
-% Add the link to the github repo and 
-%Docsteady has been developed in-house by LSST DM to address this problem. Expand on this and explain why 
-%we developed this. 
-
-% Moving this here because this is part of the problem to be solved. The documentation process is part of the solution
-% make this secion smaller and explain the problem andcontext 
-
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{imgs/VCDdetail.png}
+ \caption{Detail example extracted from the DM VCD.}
+ \label{fig:vcddetail}
+\end{center}
+\end{figure}
 
 \section{Conclusions and Outlook}
 
