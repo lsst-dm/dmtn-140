@@ -26,7 +26,7 @@ The main scope of the verification and validation activity is to ensure that all
 This includes identifying the requirements, the affected components and the verification procedures.
 
 The Data Management requirements are baselined in the \textit{Data Management Requirement Specification}\cite{LSE-61}, also know as DMSR.
-The DMS requirements are flowed down from the SRD, the \textit{LSST System Science Requirements Document} \cite{LPM-17}. 
+The DM requirements are flowed down from the SRD, the \textit{LSST System Science Requirements Document} \cite{LPM-17}. 
 Interface requirements between DM and other LSST subsystems also have an impact on Data Management provided components, 
 and therefore need to be considered during Verification and Validation. 
 The figure \ref{fig:topdoctree} shows the high level requirements documents flow down.
@@ -49,19 +49,24 @@ In the opposite case, if a provided verification element is not needed, it will 
 
 The verification activity will be done in order to fulfill test milestones, defined at project level.
 For each milestone, a test campaign will be setup. 
-Test executions are collected in test reports and coverage information is propagated back to Verification Elements and Requirements.
-% Describe a here a general V&V approach, explain our requirements documents and how they are flowed down from the SRD. DM is responsible to verify requirements that are re
+Test executions are collected in Jira and coverage information is propagated back to Verification Elements and Requirements.
+Test documents, including test reports, are generated automatically from Jira.
 
-% Leanne to add the graphics from talks and LDM-XXX on the document flowdown. (maybe just the high one) 
-% DM verifies require,ents in DMSR 
-% maybe have a flow down to lower documents
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{imgs/VandVSchema.png}
+ \caption{Schematic approach to the Verification and Validation.}
+ \label{fig:vandvschema}
+\end{center}
+\end{figure}
+% Describe a here a general V&V approach, explain our requirements documents and how they are flowed down from the SRD. DM is responsible to verify requirements that are re
 
 % How do we systematically document the verufication of all the reqirements in this picture in an automated way. 
 
 % GCM to draft a schematic of the approach 
 \section{The Verification and Validation Infrastructure}
 
-The verification and validation approach as illustrated in \cite{10.1117/12.2310125} , has been implemented.
+The verification and validation approach as illustrated in \cite{10.1117/12.2310125}  has been implemented.
 Required tools have been put in place, like \textit{Syndeia} and \textit{Docsteady}.
 
 
@@ -86,24 +91,24 @@ traceability between requirements and verification elements is in place, and tha
 \paragraph{Jira}
 is the Rubin Observatory issue tracking system.
 The Adaptavist Test Manager plugin (ATM) provides additional functionalities to Jira to manage test activities.
-Jira is hosting all test information, providing an easy to use graphic interface, where the scientist can provide all test information.
+Jira is hosting all test information, providing to the user an easy-to-use graphic interface.
 
 \paragraph{Syndeia}
-is a third party, provided by tool that integrates MagicDraw and Jira. The Verification Elements, first created in MagicDraw,
+is a third party tool that integrates MagicDraw and Jira. First the Verification Elements created in MagicDraw,
 are synched in Jira. After the test activity is completed, the information will be synched back to MagicDraw.
 
 \paragraph{Docsteady}
 is the tool that permits generation of the test documents, extracting the information from Jira using REST API.
-It can be executed manually or automatically, generating the documents in \LaTeX format.
-It can be scheduled using a continuous integration tool like for example Jenkins, making possible that 
+It can be executed manually or automatically, generating the documents in \LaTeX~format.
+It can be scheduled on a continuous integration tool like for example Jenkins, making possible that 
 the documents are generated continuously.
-The extracted documents are managed using Git repositories, and follows the  standard LSST document flow.
+The extracted documents are managed using Git repositories, and follows the  standard LSST document workflow.
 Docsteady is developed internally at LSST and the source code is available at \url{https://github.com/lsst-dm/docsteady}.
 
 \paragraph{GitHub}
 is the platform for software version management.
 Verification and Validation documents are written in Latex and maintained in git repositories.
-Each time a change is made in the document, a new pdf is built automatically and made available in the \textbf{lsst.io} landing page.
+Each time a change is made in the document, a new pdf is built automatically in the integrated Travis platform, and made available in the \textbf{lsst.io} landing page.
 
 \paragraph{lsst.io}
 is the documentation portal for LSST, see \textit{The LSST the Docs Platform for Continuous Documentation Delivery}\cite{SQR-006}~.
@@ -118,11 +123,17 @@ Documents are uploaded in Docushare only after their formal approval.
 
 The Verification and Validation activities originate from the requirements.
 We assume in this document, that the requirements have been properly formalized, documented and approved.
-We assume also, that for each requirement in MagicDraw, one or more verification elements are created.
+As described early in this paper, a defined number of verification elements is created for each requirement.
 When first created, the verification elements have no description. The only information they have is the requirement from where they have been generated.
-They are synched to Jira using Syndeia, where they can be assigned to a responsible and completed with the relevant information.
+They are synched to Jira using Syndeia, where the validation scientist ensures that they are properly addressed.
 
-\textit{[add picture?]}
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{imgs/VandVprocedure.png}
+ \caption{Schematic overview of the V\&V procedure.}
+ \label{fig:vandvtools}
+\end{center}
+\end{figure}
 
 
 \subsubsection{Verification Elements Analysis}
@@ -134,11 +145,13 @@ As a result of the analysis, the verification element will have a description, t
 Also, the verification element will be related with one or more test cases draft, which are just defined with a one sentence objective and an owner.
 Each test case is in this way automatically traced to a verification element and therefore to a requirement.
 
-\subsubsection{Test Cases Preparation}
+
+\subsubsection{Test Cases Consolidation}
 
 The owner of each test case is in charge of complete it at the best of its knowledge, including a draft test steps procedure.
 In the future when the test case is instantiate for a test campaign, a small adjustment will be required,
 Additional test cases can be created, and related to one or more requirement, depending on the needs.
+
 
 \subsubsection{Planning and Execution}
 
