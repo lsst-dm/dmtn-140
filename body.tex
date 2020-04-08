@@ -4,7 +4,7 @@ The Rubin Observatory Data Management System, as described in \textit{Juric et a
 is responsible for creating the software, services, and systems that will be used to
 produce the observatory's science-ready data products.  Project requirements on DM
 products are documented in change-controlled specifications. DM Verification and Validation activities are planned
-to guarantee that survey software and infrastructure both fulfill the system requirements and enable the science that
+to guarantee that survey software and infrastructure both fulfil the system requirements and enable the science that
 motivates the project.
 
 In line with the verification approach adopted for the Gaia DPAC project, described in in \textit{Comoretto et al}\cite{10.1117/12.926797}, 
@@ -12,7 +12,7 @@ we present here the tooling and procedures used at Rubin Observatory for the doc
 validation activities. Test activities are managed in Jira, where test cases are created and updated, and test results
 are reported. This ensures that all elements to be documented are available in one tool, that maintains a history of
 the process. The System Engineering model is synced with the Jira test framework, providing a direct link between
-tests and requirements. Test documents can therefore be generated programmatically, avoiding typical problems
+tests and requirements. Test documents can therefore be generated programatically, avoiding typical problems
 such as a lack of traceability, misspelling, duplication of content, and misalignment between documents. The
 centralized collection of information permits a high level of automation, where the extraction of test documents is
 achieved by a continuous integration process. This systematic approach substantially reduces the time required to
@@ -111,11 +111,19 @@ Docsteady is developed internally in DM and the source code is available at \url
 \paragraph{GitHub}
 is the platform for software version management.
 Verification and Validation documents are written in \LaTeX and maintained in Git repositories.
-Each time a change is made in the document, a new pdf is built automatically in the integrated Travis platform, and made available in \textbf{lsst.io}.
+Whenever an author pushes changes to GitHub, a cloud-based continuous integration service (typically Travis CI, but
+not necessarily) renders a pdf of the document and uploads it to \textbf{LSST the Docs}.
 
-\paragraph{lsst.io}
-is the documentation portal for LSST, see \textit{The LSST the Docs Platform for Continuous Documentation Delivery}\cite{SQR-006}.
-Each document has a lsst.io publication page, where the pdf is pushed by Travis, after each successful build.
+\paragraph{LSST the Docs}
+is LSST's documentation hosting platform, see \textit{The LSST the Docs Platform for Continuous Documentation Delivery}\cite{SQR-006}. 
+LSST the Docs hosts not only the accepted version of a document on its own subdomain of \texttt{lsst.io}, but also draft and
+historical versions corresponding to Git branches and tags.
+By publishing draft updates of documents in near-real-time, teams can collaborate and comment on documents without having to
+compile them locally.
+LSST the Docs hosts any type of static web content.
+To specifically publish pdf documents, we run a tool within the continuous integration service called \textit{Lander}
+(available at \url{https://github.com/lsst-sqre/lander})
+that generates an HTML landing page for the pdf based on metadata extracted from the document's source.
 
 \paragraph{Docushare}
 is the official Rubin Observatory documentation repository during construction.
@@ -186,7 +194,7 @@ At the end of this phase we shall be able to say: \textbf{the test is ready to s
 Despite in the Rubin Observatory there are no formal Test Readiness Review for each test campaign, 
 the tooling and procedures in place permit the person who is responsible for the test activity, and relevant stakeholders, to assess and review the collected information. 
 This is done by extracting the information into a document, the \textit{Test Plan and Report}, in GitHub, generating the pdf and making it available
-in the corresponding lsst.io landing page. Contributors, reviewers and stakeholders can easily access the produced pdf,
+in the corresponding LSST the Docs landing page. Contributors, reviewers and stakeholders can easily access the produced pdf,
 check the content of the test plan, and comment, ask for clarification, or request changes using the GitHub
 Pull Request (PR) mechanism or the corresponding Jira issue.
 When agreement has been reached, the Jira ATM Test Plan status is changed to \textbf{Approved}. The test activity is ready to start.
@@ -215,10 +223,10 @@ At the end of the test campaign, the Test Plan and Report is issued and uploaded
 
 These documents identified in the above steps are generated using the \textbf{Docsteady}.
 The generation can be done manually, or automatically.
-Automation is particularly useful in case we want to see every day the progress of the previous day published in the lsst.io landing page.
+Automation is particularly useful in case we want to see every day the progress of the previous day published in the LSST the Docs landing page.
 
 The extraction tool ensures homogeneity of information at all levels in the Verification and Validation activities, 
-and permits the user sto concentrate only on the relevant test activities, without the need to worry about any documentation aspect.
+and permits the user to concentrate only on the relevant test activities, without the need to worry about any documentation aspect.
 Follows a summary of the test document:
 
 \begin{itemize}
@@ -242,7 +250,7 @@ As it has been described in the above sections, all Rubin Observatory test infor
 This makes it easy to extract the Verification Control Document (VCD), where we summarize the level of coverage for each requirement.
 
 The VCD is a \LaTeX document generated using the document generation tool Docsteady. 
-It is managed in a Github repository, as done for the other test documents, built in Travis and published in lsst.io.
+It is managed in a GitHub repository, as done for the other test documents, built in Travis CI and published through LSST the Docs.
 
 Since the number of requirement and verification elements for the Rubin Observatory is very high --
 approximately 700 requirements and 1000 verification elements only in DM -- a separate VCD is generated for each subsystem.
