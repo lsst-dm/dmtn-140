@@ -84,6 +84,11 @@ Figure \ref{fig:vandvtools} gives a schematic overview of them.
 \end{center}
 \end{figure}
 
+In figure \ref{fig:overview} we can see a few snapshots taken from the used tools.
+Specifically how Verification and Validation information flows from Jira, where it is created and maintained,
+to the final document ready to be uploaded in Docushare, 
+
+
 \paragraph{MagicDraw}
 is the Rubin Observatory Modeling tool. It is used for maintaining the project model and for requirement management.
 %not sure project model is descriptive enough
@@ -103,11 +108,11 @@ are synced in Jira. After the test activity is completed, the information will b
 
 \paragraph{Docsteady}
 is the tool that permits generation of the test documents, extracting the information from Jira using the REST API.
-It can be executed manually or automatically, and generates the documents in \LaTeX~format.
+It can be executed manually -- from command line -- or automatically -- in a continuous integration (CI) tool -- 
+and generates the documents in \LaTeX~format.
+Using a CI system like for example Jenkins, makes possible to generate verification and validation documents continuously, or on a regular bases.
+The extracted \LaTeX~ code is managed in Git repositories, following the  DM document workflow.
 %automaticall - perhpas clarify wiht a travis or jenkins job or what do you mean by autmatically .. cause next you speak of scheduling ..
-It can be scheduled on a continuous integration tool like for example Jenkins, making possible that
-the documents are generated continuously.
-The extracted documents are managed using Git repositories, and follow the  DM document workflow.
 Docsteady is developed within DM and the source code is available at \url{https://github.com/lsst-dm/docsteady}.
 
 % Perhps also a screen shot of github ttravis and lsst the docs for one doc like the vcd ..
@@ -115,8 +120,8 @@ Docsteady is developed within DM and the source code is available at \url{https:
 \paragraph{GitHub}
 is the platform for software version management.
 Verification and Validation documents are written in \LaTeX and maintained in Git repositories.
-Whenever an author pushes changes to GitHub, a cloud-based continuous integration service (typically Travis CI
-) renders a pdf of the document and uploads it to \textbf{LSST the Docs}.
+Whenever an author pushes changes to GitHub, a cloud-based continuous integration service 
+(typically Travis CI) renders a pdf of the document and uploads it to \textbf{LSST the Docs}.
 
 \paragraph{LSST the Docs}
 is LSST's documentation hosting platform, see \textit{The LSST the Docs Platform for Continuous Documentation Delivery}\cite{SQR-006}.
@@ -131,8 +136,16 @@ that generates an HTML landing page for the pdf based on metadata extracted from
 
 \paragraph{Docushare}
 is the official Rubin Observatory documentation repository during construction.
-Documents are uploaded in Docushare only after their formal approval.
+%Documents are uploaded in Docushare after their formal approval.
 %by the CCB ? But other things go in docushare wihtout approval ..
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{imgs/screenshots.png}
+ \caption{Tools workflow overview: bringing information from Jira ATM to the published document.}
+ \label{fig:overview}
+\end{center}
+\end{figure}
 
 
 \subsection{Process Overview}\label{sec:proc}
@@ -160,11 +173,17 @@ The following subsections describe the main steps of the verification and valida
 The first activity, required before starting with any test campaign, is to ensure that each verification elements is completed with the relevant information.
 This is done by the validation scientist, or delegated.
 
-As a result of the analysis, the verification element will have a description, that describes its scope: which aspect of the requirement will be verified.
+In this phase, the verification elements shall be completed with the following information:
+\begin{itemize}
+\item the description which clarifies the scope of the verification element: which part of a requirement will be verified.
+\item one or more draft test cases, which are  defined with a one sentence objective and an owner. Each test case is in this way automatically traced to a verification element and therefore to a requirement.
+\end{itemize}
+%As a result of the analysis, the verification element will have a description, that describes its scope: which aspect of the requirement will be verified.
 %dont like this line
-Also, the verification element will be related with one or more draft test cases, which are  defined with a one sentence objective and an owner.
-Each test case is in this way automatically traced to a verification element and therefore to a requirement.
+%Also, the verification element will be related with one or more draft test cases, which are  defined with a one sentence objective and an owner.
+%Each test case is in this way automatically traced to a verification element and therefore to a requirement.
 Verification Elements are baselined in a \textit{Verification Baseline Document}.
+
 
 \subsubsection{Test Cases Consolidation}
 
@@ -176,7 +195,7 @@ In general, test cases can be related with multiple verification elements, and t
 Test cases should be general, and just specify the software component or the dataset type required.
 The exact software and/or dataset versions and the configuration to be used during the test
 is provided in the test campaign planing phase.
-When test cases are instantiated in a test campaign, small adjustments may be made.
+%When test cases are instantiated in a test campaign, small adjustments may be made.
 %clarify what kind of adjustments
 Test Cases are baselined in \textit{Test Specifications}.
 
@@ -195,8 +214,8 @@ to the Jira ATM Test Plan, and provides the list of test cases that need to be e
 For each test campaign we identify two phases:
 
 \paragraph{Planning}
-It is the phase when the test campaign is prepared. All relevant information, e.g. software version, datasets to use, hardware or configuration,
-is  collected in the Jira ATM Test Plan and Test Cycle(s).
+It is the phase when the test campaign is prepared. All relevant information, e.g. software version, datasets to use, 
+hardware or configuration, is  collected in the two ATM objects defining the test campaign:  the Jira Test Plan and the Jira Test Cycle(s).
 %not obvious you can collect stuf fin two places ..
 At the end of this phase we shall be able to say: \textbf{the test is ready to start}.
 Rubin Observatory does not instigate a formal Test Readiness Review for each test campaign,
@@ -276,7 +295,8 @@ Figure \ref{fig:vcddetail} shows a detail example extracted from the DM VCD.
 \end{itemize}
 
 The VCD is an important management tool assessing the  level of verification and validation that has been achieved so far.
- It is also useful to provided to review panels to demonstrate that the expected milestones have been met.
+ It is also useful to provided to review panels to show which requirements have been verified, 
+ including for each of them a link to the test document were more detailed information can be found.
 % The test reports more readily show a milestone has been met ..
 
 \begin{figure}
@@ -290,7 +310,8 @@ The VCD is an important management tool assessing the  level of verification and
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{imgs/VCDdetail.png}
- \caption{Example of a detailed information for a requirement extracted from the DM VCD.}
+ \caption{Example of a detailed information for a requirement extracted from the DM VCD 
+ showing a Verification Element and 3 test cases, which 2 have been run and passed.}
  \label{fig:vcddetail}
 \end{center}
 \end{figure}
