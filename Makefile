@@ -18,10 +18,10 @@ $(DOCNAME).pdf: $(tex) meta.tex local.bib  acronyms.tex authors.tex
 
 # Acronym tool allows for selection of acronyms based on tags - you may want more than DM
 acronyms.tex: $(tex) myacronyms.txt
-	python $(TEXMFHOME)/../bin/generateAcronyms.py -t "DM" $(tex)
+	$(TEXMFHOME)/../bin/generateAcronyms.py -t "DM" $(tex)
 
 authors.tex:  authors.yaml
-	python $(TEXMFHOME)/../bin/db2authors.py -m spie > authors.tex 
+	$(TEXMFHOME)/../bin/db2authors.py -m spie > authors.tex 
 
 .PHONY: clean
 clean:
