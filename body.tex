@@ -90,7 +90,8 @@ to the final document ready to be uploaded in Docushare,
 
 
 \paragraph{MagicDraw}
-is the Rubin Observatory Modeling tool. It is used for maintaining the project model and for requirement management.
+is the Rubin Observatory Modeling tool. It is used for maintaining the project model,
+using MBSE approach, and for requirements management.
 %not sure project model is descriptive enough
 The Verification Elements are created in MagicDraw using the requirements as a starting point,
 and are synchronized to and from Jira using \textbf{Syndeia}.
@@ -99,18 +100,21 @@ and that changes in one part of the system can be propagated through other compo
 
 \paragraph{Jira}
 is the Rubin Observatory issue tracking system.
-The Adaptavist Test Manager plugin (ATM) provides additional functionality to Jira to manage test activities.
+The Test Manager for Jira plugin (TM4J), previously known as Adaptavist Test Manager (ATM),
+provides additional functionality to Jira to manage test activities.
 Jira hosts all test information, providing an easy-to-use graphical interface to the user.
 
 \paragraph{Syndeia}
-is a third party tool that integrates MagicDraw and Jira. First the Verification Elements created in MagicDraw,
-are synced in Jira. After the test activity is completed, the information will be synced back to MagicDraw.
+is a third party tool that integrates MagicDraw and Jira. 
+First the Verification Elements are created in MagicDraw and then the data is synced to Jira
+via a mapping between the fields in MagicDraw and the fields in Jira, utilizing the REST API.
+After the test activity is completed, the information will be synced back to MagicDraw.
 
 \paragraph{Docsteady}
 is the tool that permits generation of the test documents, extracting the information from Jira using the REST API.
 It can be executed manually -- from command line -- or automatically -- in a continuous integration (CI) tool -- 
 and generates the documents in \LaTeX~format.
-Using a CI system like for example Jenkins, makes possible to generate verification and validation documents continuously, or on a regular bases.
+Using a CI system like for example Jenkins, it makes possible to generate verification and validation documents continuously, or on a regular bases.
 The extracted \LaTeX~ code is managed in Git repositories, following the  DM document workflow.
 %automaticall - perhpas clarify wiht a travis or jenkins job or what do you mean by autmatically .. cause next you speak of scheduling ..
 Docsteady is developed within DM and the source code is available at \url{https://github.com/lsst-dm/docsteady}.
@@ -142,7 +146,7 @@ is the official Rubin Observatory documentation repository during construction.
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{imgs/screenshots.png}
- \caption{Tools workflow overview: bringing information from Jira ATM to the published document.}
+ \caption{Tools workflow overview: bringing information from Jira TM4J to the published document.}
  \label{fig:overview}
 \end{center}
 \end{figure}
@@ -153,7 +157,8 @@ is the official Rubin Observatory documentation repository during construction.
 The Verification and Validation activities originate from the requirements.
 We assume in this document, that the requirements have been properly formalized, documented and approved.
 As described early in this paper, a defined number of verification elements are created for each requirement.
-When first created, the verification elements have no description only the requirement which generated them.
+When first created, the verification elements have no description.
+The only information they have is the requirement which generates them.
 They are synced to Jira using Syndeia, where the validation scientist ensures that they are properly addressed.
 Figure  \ref{fig:vandvtools} gives a graphical overview of the process.
 
@@ -202,47 +207,47 @@ Test Cases are baselined in \textit{Test Specifications}.
 \subsubsection{Planning and Execution}
 
 As we already mentioned above, the test activities are organized in test campaigns.
-For each test campaign, two Jira ATM objects are created:
+For each test campaign, two TM4J objects are created:
 
 \begin{itemize}
-\item \textbf{Jira ATM Test Plan} that provides the context of the test activity, and usually corresponds to a project milestone.
-\item \textbf{Jira ATM Test Cycle}(s) that provides the scope. For each test campaign we may have multiple test cycles,
+\item \textbf{TM4J Test Plan} that provides the context of the test activity, and usually corresponds to a project milestone.
+\item \textbf{TM4J Test Cycle}(s) that provides the scope. For each test campaign we may have multiple test cycles,
 with different configurations, datasets, or extra conditions we may want to test. Each Test Cycle is traced
-to the Jira ATM Test Plan, and provides the list of test cases that need to be executed.
+to the TM4J Test Plan, and provides the list of test cases that need to be executed within that scope.
 \end{itemize}
 
 For each test campaign we identify two phases:
 
 \paragraph{Planning}
 It is the phase when the test campaign is prepared. All relevant information, e.g. software version, datasets to use, 
-hardware or configuration, is  collected in the two ATM objects defining the test campaign:  the Jira Test Plan and the Jira Test Cycle(s).
+hardware or configuration, is  collected in the two TM4J objects defining the test campaign:  the Jira Test Plan and the Jira Test Cycle(s).
 %not obvious you can collect stuf fin two places ..
 At the end of this phase we shall be able to say: \textbf{the test is ready to start}.
 Rubin Observatory does not instigate a formal Test Readiness Review for each test campaign,
 however the tooling and procedures in place permit the person who is responsible for the test activity, and relevant stakeholders, to assess and review the collected information.
 This is done by extracting the information into a document, the \textit{Test Plan and Report}, in GitHub, generating the pdf and making it available
 in the corresponding LSST the Docs landing page. Contributors, reviewers and stakeholders can easily access the produced pdf,
-check the content of the test plan, and comment, ask for clarification, or request changes using the GitHub
+check the content of the Test Plan, and comment, ask for clarification, or request changes using the GitHub
 Pull Request (PR) mechanism or the corresponding Jira issue.
-When agreement has been reached, the Jira ATM Test Plan status is changed to \textbf{Approved}. The test activity is ready to start.
+When agreement has been reached, the TM4J Test Plan status is changed to \textbf{Approved}. The test activity is ready to start.
 
 The outcome of this first phase is an approved \textit{Test Plan and Report} document to be uploaded in Docushare.
 The document at this stage provides the agreed test procedures and all the necessary information required to execute the tests.
 
 \paragraph{Execution}
-In this phase, the testers, identified in the previous test plan phase, are  execute the test procedures and
-document the result of each steps in Jira ATM.
-The ATM plugin provides a test player view, where for each step in each test case, it is possible to say if it has been executed successfully or not,
+In this phase, the testers, identified in the previous phase, are  executing the test procedures and
+documenting the result of each steps in Jira.
+The TM4J plugin provides a test player view, where for each step in each test case, it is possible to say if it has been executed successfully or not,
 specify the result of the step, and relate any Jira issue that has been found during the test execution.
 
 The test result information is extracted and added to the \textit{Test Plan and Report} document.
-Once the test execution is completed, an overall assessment must  be provided in the Jira ATM Test Plan.
+Once the test execution is completed, an overall assessment must  be provided in the TM4J Test Plan.
 
 As done in the previous phase, the document is generated automatically from Jira and provides an easy way to access the test campaign information.
 Stakeholders can review the outcome of the test campaign using the same PR mechanism reported above,
 commenting, asking for more information or changes if required, and finally, when consensus is reached, approve the test campaign result.
 
-The Jira ATM test plan status will then be changed to \textbf{Done}.
+The TM4J Test Plan status will then be changed to \textbf{Done}.
 At the end of the test campaign, the Test Plan and Report is issued and uploaded to Docushare.
 
 
@@ -262,7 +267,7 @@ and permits the user to concentrate only on the relevant test activities, withou
 A new issue of the document is made each time there is a substantial change in the test cases definition.
 \item \textbf{Test Plan and Report}:  for a single test campaign this includes all planning and execution information.
 It  is issued at least two  times. The first issue corresponds to the consolidation of the planning activity,
-the second to the finalized test campaign containing the results of the test activities.
+the second to the finalized test campaign containing the results of the same.
 \item \textbf{Verification Baseline Document}: provides a snapshot of the verification elements.
 The verification elements are  maintained as Jira issues, and  thus are easy to change.
 Having a snapshot of the verification elements at a specific point in time  (in the form of a document) makes
@@ -325,7 +330,7 @@ required to produce verification and validation documentation.
 This permits the team to concentrate on the relevant test activities, maximizing the scientific outcome.
 
 At the same time, automation and continuous integration of the documents generation makes test information
-much more accessible to the user and stakeholders.
+much more accessible to the users and stakeholders.
 The tooling also ensures that aspects such as traceability between tests and requirements, homogeneity of the information
 or reusability of test cases are easy to implement and provide added value to the process.
 
