@@ -84,15 +84,14 @@ Figure \ref{fig:vandvtools} gives a schematic overview of them.
 \end{center}
 \end{figure}
 
-In figure \ref{fig:overview} we can see a few snapshots taken from the used tools.
-Specifically how Verification and Validation information flows from Jira, where it is created and maintained,
+Figure \ref{fig:overview} shows the implementation in LSST of the architecture outlined in figure \ref{fig:vandvtools}.
+We can see how Verification and Validation information flows from Jira, where it is created and maintained,
 to the final document ready to be uploaded in Docushare, 
 
 
 \paragraph{MagicDraw}
 is the Rubin Observatory Modeling tool. It is used for maintaining the project model,
 using MBSE approach, and for requirements management.
-%not sure project model is descriptive enough
 The Verification Elements are created in MagicDraw using the requirements as a starting point,
 and are synchronized to and from Jira using \textbf{Syndeia}.
 This ensures that the proper traceability between requirements and verification elements is in place,
@@ -116,10 +115,7 @@ It can be executed manually -- from command line -- or automatically -- in a con
 and generates the documents in \LaTeX~format.
 Using a CI system like for example Jenkins, it makes possible to generate verification and validation documents continuously, or on a regular bases.
 The extracted \LaTeX~ code is managed in Git repositories, following the  DM document workflow.
-%automaticall - perhpas clarify wiht a travis or jenkins job or what do you mean by autmatically .. cause next you speak of scheduling ..
 Docsteady is developed within DM and the source code is available at \url{https://github.com/lsst-dm/docsteady}.
-
-% Perhps also a screen shot of github ttravis and lsst the docs for one doc like the vcd ..
 
 \paragraph{GitHub}
 is the platform for software version management.
@@ -140,8 +136,6 @@ that generates an HTML landing page for the pdf based on metadata extracted from
 
 \paragraph{Docushare}
 is the official Rubin Observatory documentation repository during construction.
-%Documents are uploaded in Docushare after their formal approval.
-%by the CCB ? But other things go in docushare wihtout approval ..
 
 \begin{figure}
 \begin{center}
