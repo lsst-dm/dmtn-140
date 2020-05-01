@@ -20,11 +20,12 @@ detailed in \textit{Selvy et al}\cite{10.1117/12.2310125}, ensures full traceabi
 
 
 \section{The Verification and Validation Problem}
+\label{sec:vandvproblem}
 
 The main scope of the verification and validation activity is to ensure that all requirements have been properly implemented and verified.
 This includes identifying the requirements, the affected components and the verification procedures.
 
-The Data Management requirements are baselined in the \textit{Data Management System Requirements}\cite{LSE-61}, also know as the DMSR.
+The Data Management requirements are baselined in the \textit{Data Management System Requirements}\cite{LSE-61}, also known as the DMSR.
 The DM requirements are flowed down from the \textit{LSST System Science Requirements Document} (SRD) \cite{LPM-17}. Interface requirements between DM and other LSST subsystems also have an impact on Data Management provided components and therefore need to be considered during Verification and Validation.
 Figure \ref{fig:topdoctree} shows the flow down of high level requirements documents.
 
@@ -44,7 +45,7 @@ The validation scientist will also ensure that for each verification element the
 In the case that the provided verification elements are not sufficient, the validation scientist will request additional verification elements be associated with the requirement.
 In the opposite case, if a provided verification element is not needed, it will be removed.
 
-The verification and validation activities are organized into test campaigns, each of which is associate with one or more project level milestones.
+The verification and validation activities are organized into test campaigns, each of which is associated with one or more project level milestones.
 The results of the test executions are collected in Jira and coverage information is propagated back to the Verification Elements and Requirements.
 Test documents, including test reports, are generated automatically from Jira.
 
@@ -56,7 +57,7 @@ Test documents, including test reports, are generated automatically from Jira.
 \end{center}
 \end{figure}
 
-The approach ensures that all elements required for the tests are linked and available in Jira, 
+This approach ensures that all elements required for the tests are linked and available in Jira, 
 providing traceability and making it possible to extract the necessary information into test documents without manual intervention.
 Figure \ref{fig:vandvschema} shows the relationships between requirements, verification elements, test cases and results.
 
@@ -148,9 +149,9 @@ is the official Rubin Observatory documentation repository during construction.
 All Verification and Validation activities derive from the requirements.
 We assume in this document, that the requirements have been properly formalized, documented and approved.
 As described early in this paper, a defined number of verification elements are created for each requirement.
-When first created, the verification elements have no description.
-The only information they have is the requirement which generates them.
-They are synced to Jira using Syndeia, where the validation scientist ensures that they are properly addressed.
+When first created, the verification elements have no description;
+the only information they contain is the details of requirement from which they were generated.
+They are synced to Jira using Syndeia, after which the validation scientist ensures that they are properly addressed.
 Figure  \ref{fig:vandvtools} gives a graphical overview of the process.
 
 \begin{figure}
@@ -172,7 +173,7 @@ This is done by the validation scientist, or delegated.
 
 In this phase, the verification elements shall be completed with the following information:
 \begin{itemize}
-\item the description, which clarifies the scope of the verification element, that is, which part of the requirement will be verified.
+\item the description, which clarifies the scope of the verification element, that is, which part or parts of the requirement will be verified.
 \item one or more draft test cases, each of which are defined with a one sentence objective and an owner. 
 In this way each test case is automatically traced to a verification element and therefore to a requirement.
 \end{itemize}
@@ -193,7 +194,7 @@ Test Cases are baselined in \textit{Test Specifications}.
 
 \subsubsection{Planning and Execution}
 
-As we already mentioned above, the test activities are organized into test campaigns.
+As described in \ref{sec:vandvproblem} all test activities are organized into test campaigns.
 For each test campaign, two TM4J objects are created:
 
 \begin{itemize}
@@ -213,27 +214,27 @@ At the successful completion of this phase the test is ready to start.
 Rubin Observatory does not instigate a formal Test Readiness Review for each test campaign,
 however the tooling and procedures in place permit the person who is responsible for the test activity, and relevant stakeholders, to assess and review the collected information.
 This is done by extracting the information into a document, the \textit{Test Plan and Report}, in GitHub, generating the pdf and making it available
-in the corresponding LSST the Docs landing page. Product owner, contributors and stakeholders can easily access the produced pdf,
+in the corresponding LSST the Docs landing page. The Product Owner, contributors and stakeholders can easily access the produced pdf,
 check the content of the Test Plan, and comment, ask for clarification, or request changes using the GitHub
-Pull Request (PR) mechanism or the corresponding Jira issue.
+Pull Request (PR) mechanism or the corresponding Jira issue. 
 When agreement has been reached, the TM4J Test Plan status is changed to \textbf{Approved}. The test activity is ready to start.
 
 The outcome of this first phase is an approved \textit{Test Plan and Report} document to be uploaded in Docushare.
 The document at this stage provides the agreed test procedures and all the necessary information required to execute the tests.
 
 \paragraph{Execution}
-In this phase, the testers, identified in the previous phase, are  executing the test procedures and
-documenting the result of each steps in Jira.
+In this phase, the testers, identified in the previous phase, execute the test procedures and
+document the result of each step in Jira.
 The TM4J plugin provides a test player view, where for each step in each test case, it is possible to say if it has been executed successfully or not,
 specifying the result of the step, and associating any Jira issues that have been found during the test execution.
 
 The test result information is extracted and added to the \textit{Test Plan and Report} document.
 Once the test execution is complete, an overall assessment must be provided in the TM4J Test Plan.
 
-As done in the previous phase, the document is generated automatically from Jira and provides an easy way to access the test campaign information.
+As in the previous phase, the document is generated automatically from Jira and provides an easy way to access the test campaign information.
 Product owner, contributors and stakeholders can review the outcome of the test campaign 
 using the same PR mechanism reported above, commenting, asking for more information or changes if required.
-Finally, product owner is in charge of approving the test campaign result, when he/she considers that the collected information is completed.
+Finally, Product Owner is in charge of approving the test campaign result, when s/he considers that the collected information is complete.
 
 The TM4J Test Plan status will then be changed to \textbf{Done}.
 At the end of the test campaign, the Test Plan and Report is issued and uploaded to Docushare.
@@ -241,12 +242,12 @@ At the end of the test campaign, the Test Plan and Report is issued and uploaded
 
 \subsection{Test Documents}
 
-The documents identified in the above steps are generated using the \textbf{Docsteady}.
+The documents identified in the above steps are generated using  \textbf{Docsteady}.
 The generation can be done manually, or automatically.
-Automation is particularly useful in case we want to see daily progress published in the LSST the Docs landing page.
+Automation is particularly if we want to see daily progress published on the LSST the Docs landing page.
 
 The extraction tool ensures homogeneity of information at all levels in the Verification and Validation activities,
-and permits the user to concentrate only on the relevant test activities, without the need to worry about any documentation aspect.
+and allows the user to concentrate only on the relevant test activities, without the need to worry about any documentation aspects.
 
 The test documents are:
 
@@ -270,15 +271,14 @@ Test Specifications and Verification Baseline documents are created for specific
 
 The Verification Control Document (VCD) provides an overview layer that summarize all V\&V activities.
 Therefore it is an important management tool for assessing the level of verification and validation that has been achieved to date.
-It is also useful to include it in reviews documents pack, to show which requirements have been verified.
+It is also useful to include it in review documents packs, to show which requirements have been verified.
 
-Thanks to the fact that all the test information is available in Jira, the VCD can easily be extracted from there,
-using the document generation tool Docsteady.
-As for other test documents, the VCD is a \LaTeX~document, managed in a GitHub repository, built with Travis CI and published through LSST the Docs.
+Given that all information pertaining to V\&V activities is stored in Jira, the VCD can be easily be extracted on-demand using the document generation tool Docsteady.
+As for all other test documents, the VCD is a \LaTeX~document, managed in a GitHub repository, built with Travis CI and published through LSST the Docs.
 
-Since the number of requirement and verification elements for the Rubin Observatory is very high --
+Given that both the number of requirements and verification elements for Rubin Observatory is very high --
 approximately 700 requirements and 1000 verification elements in DM alone -- a separate VCD is generated for each subsystem.
-There are 2 main sections:
+There are 2 main sections to the VCD:
 
 \begin{itemize}
 \item \textbf{Summary Information} where a status overview is given.
@@ -302,7 +302,7 @@ Figure \ref{fig:vcddetail} shows a detail example extracted from the DM VCD.
 \begin{center}
 \includegraphics[width=\textwidth]{imgs/VCDdetail.png}
  \caption{Example of a detailed information for a requirement extracted from the DM VCD 
- showing a Verification Element and 3 test cases, which 2 have been run and passed.}
+ showing a Verification Element and 3 test cases, of which 2 have been executed and passed.}
  \label{fig:vcddetail}
 \end{center}
 \end{figure}
