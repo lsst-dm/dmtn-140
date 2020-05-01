@@ -270,17 +270,17 @@ Test Specifications and Verification Baseline documents are created for specific
 
 \section{The Verification Control Document}
 
-In a project like the Rubin Observatory construction,
-it is important to have an overview layer that summarize all V\&V activities.
-This summary is provided in the Verification Control Document (VCD), 
-thanks to the fact that all the test information is available in Jira and can be easily extracted from there.
+The Verification Control Document (VCD) provides an overview layer that summarize all V\&V activities.
+Therefore it is an important management tool for assessing the level of verification and validation that has been achieved to date.
+It is also useful to include it in reviews documents pack, to show which requirements have been verified.
 
-The VCD is a \LaTeX~document generated using the document generation tool Docsteady.
-As for other documents the VCD is managed in a GitHub repository, built with Travis CI and published through LSST the Docs.
+Thanks to the fact that all the test information is available in Jira, the VCD can easily be extracted from there,
+using the document generation tool Docsteady.
+As for other test documents, the VCD is a \LaTeX~document, managed in a GitHub repository, built with Travis CI and published through LSST the Docs.
 
 Since the number of requirement and verification elements for the Rubin Observatory is very high --
 approximately 700 requirements and 1000 verification elements in DM alone -- a separate VCD is generated for each subsystem.
-In this document there are 2 main sections:
+There are 2 main sections:
 
 \begin{itemize}
 \item \textbf{Summary Information} where a status overview is given.
@@ -290,11 +290,6 @@ Figure \ref{fig:vcdsum} shows an example extracted from the DM VCD.
 and the status of the test cases are shown. Links to the test documents are provided, but not descriptive information.
 Figure \ref{fig:vcddetail} shows a detail example extracted from the DM VCD.
 \end{itemize}
-
-The VCD is an important management tool for assessing the  level of verification and validation that has been achieved to date.
- It is also useful to provided to review panels to show which requirements have been verified, 
- including for each of them a link to the test document were more detailed information can be found.
-% The test reports more readily show a milestone has been met ..
 
 \begin{figure}
 \begin{center}
@@ -313,7 +308,8 @@ The VCD is an important management tool for assessing the  level of verification
  \label{fig:vcddetail}
 \end{center}
 \end{figure}
-%might be good to put more description .. showing a Verlifcation element and 3 test cases 2 whihc have been run and passed.
+
+
 \section{Conclusions and Outlook}
 
 In the context of a large project like Rubin Observatory construction, with a large number of requirements
