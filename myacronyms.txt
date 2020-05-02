@@ -5,3 +5,4 @@
 #
 # Example:
 #   MIA:Missing In Action
+TM4J=Test Manager for Jira (formerly Adaptivist Test Manager)

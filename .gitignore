@@ -1,6 +1,7 @@
 DMTN-140.pdf
 meta.tex
 acronyms.tex
+authors.tex
 *.aux
 *.log
 *.out
