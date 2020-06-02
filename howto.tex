@@ -1,0 +1,98 @@
+\documentclass[DM]{lsstdoc}
+
+\author{G. Comoretto}
+
+
+\begin{document}
+
+\date{\today}
+
+\title{How To Execute docsteady}
+\mkshorttitle
+
+\section{Introduction}
+
+This is intended to be a short guide to help executing docsteady to render the test documents.
+
+
+\section{Installation}
+
+First create a conda environment based on docsteady:
+
+\texttt{conda create --name docsteady docsteady -c gcomoretto}
+
+and activate it:
+
+\texttt{conda activate docsteady}
+
+This environment will provide all dependencies that are required to build and run docsteady.
+
+You may now checkout the github repository, do you changes and install them in the environemnt:
+
+\texttt{python setup.py install}
+
+It should be possible to have the conda package available in conda-forge.
+
+
+\section{Execution}
+
+The following information is also available using the \texttt{--help} option.
+
+In addition, existing document have a .docugen file with the command to be executed in CI.
+
+It is recommended to have setup the following environment variables:
+
+\begin{itemize}
+\item JIRA\_USER
+\item JIRA\_PASSWORD
+\end{itemize}
+
+othervise it is required to specify them from command line.
+
+
+\subsection{VCD genration}
+
+\texttt{docsteady generate-vcd --sql True DM jira\_docugen.tex}
+
+The command extracts from Jira all information regarding \textbf{DM} and generate the file \texttt{jira\_docugen.tex}.
+This file is meant to be included in LDM-639.tex.
+
+The VCD is generated accessing the database instead of using the REST API. Therefore the following environment variables should be specified:
+
+\begin{itemize}
+\item JIRA\_VCD\_USER
+\item JIRA\_VCD\_PASSWORD
+\end{itemize}
+
+In addition, since the access to the Jira database is possible only from the Tucson network, it is required to be connected via VPN.
+
+
+
+\subsection{Test Specification generation}
+
+
+\subsection{Test Plan and Report generation}
+
+\texttt{docsteady generate-tpr LVV-P72 DMTR-231.tex --trace true}
+
+The command extract the information from Jira using REST API.
+Each test plan and report has to correspond to a Jira test plan (i.e. LVV-P72).
+The information is stored in a tex file, i.e. \texttt{DMTR-231.text}, that can be build directly.
+An appendix file is also created, in this case \texttt{DMTR-231.appenx.tex}.
+
+However additional files is required.
+
+\begin{itemize}
+\item Makefile
+\item appendix.tex
+\item history\_and\_info.tex
+\end{itemize}
+
+It should be possible to have the repository setup by sqrbot-jr.
+
+
+\subsection{Verification Element Baseline generation}
+
+
+
+\end{document}
