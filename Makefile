@@ -13,6 +13,8 @@ endif
 
 export TEXMFHOME ?= lsst-texmf/texmf
 
+all: $(DOCNAME).pdf howto
+
 $(DOCNAME).pdf: $(tex) meta.tex local.bib  acronyms.tex authors.tex
 	latexmk -bibtex -xelatex -f $(DOCNAME)
 
@@ -40,3 +42,6 @@ meta.tex: Makefile .FORCE
 	/bin/echo '\newcommand{\lsstDocNum}{$(DOCNUMBER)}' >>$@
 	/bin/echo '\newcommand{\vcsRevision}{$(GITVERSION)$(GITDIRTY)}' >>$@
 	/bin/echo '\newcommand{\vcsDate}{$(GITDATE)}' >>$@
+
+howto:
+	pdflatex howto.tex

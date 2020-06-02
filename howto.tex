@@ -12,42 +12,42 @@
 
 \section{Introduction}
 
-This is intended to be a short guide to help executing docsteady to render the test documents.
+This is intended to be a short guide to help the installation and  execution of docsteady.
 
 
 \section{Installation}
 
-First create a conda environment based on docsteady:
+Create a conda environment based on docsteady:
 
-\texttt{conda create --name docsteady docsteady -c gcomoretto}
+\texttt{conda create --name docsteady-env docsteady -c gcomoretto}
 
-and activate it:
+Ensure that the conda configuration file  \texttt{.condarc} does not include the conda-forge channel.
 
-\texttt{conda activate docsteady}
+To use docsteady, activate the environment as follows:
+
+\texttt{conda activate docsteady-dev}
 
 This environment will provide all dependencies that are required to build and run docsteady.
 
-You may now checkout the github repository, do you changes and install them in the environemnt:
+It is recommended to use the provided conda environment also for development activities.
 
-\texttt{python setup.py install}
-
-It should be possible to have the conda package available in conda-forge.
+Next release will make the distribution compatible with conda-forge. Future release should be provided in conda-forge channel instead of a private channel.
 
 
 \section{Execution}
 
-The following information is also available using the \texttt{--help} option.
+The information provided in this section is also available using the \texttt{--help} option.
 
-In addition, existing document have a .docugen file with the command to be executed in CI.
+In addition, existing documents have a \texttt{.docugen} file with the command to be executed in CI, that can be used as an example.
 
-It is recommended to have setup the following environment variables:
+It is recommended to setup the following environment variables:
 
 \begin{itemize}
 \item JIRA\_USER
 \item JIRA\_PASSWORD
 \end{itemize}
 
-othervise it is required to specify them from command line.
+otherwise it is required to specify them from command line.
 
 
 \subsection{VCD genration}
@@ -65,7 +65,6 @@ The VCD is generated accessing the database instead of using the REST API. There
 \end{itemize}
 
 In addition, since the access to the Jira database is possible only from the Tucson network, it is required to be connected via VPN.
-
 
 
 \subsection{Test Specification generation}
@@ -88,11 +87,10 @@ However additional files is required.
 \item history\_and\_info.tex
 \end{itemize}
 
-It should be possible to have the repository setup by sqrbot-jr.
+It should be possible to have the repository setup by sqrbot-jr (not available yet).
 
 
 \subsection{Verification Element Baseline generation}
-
-
+s
 
 \end{document}
