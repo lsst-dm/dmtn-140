@@ -44,4 +44,4 @@ meta.tex: Makefile .FORCE
 	/bin/echo '\newcommand{\vcsDate}{$(GITDATE)}' >>$@
 
 howto:
-	pdflatex howto.tex
+	latexmk -bibtex -xelatex -f howto.tex

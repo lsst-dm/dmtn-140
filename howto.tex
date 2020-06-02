@@ -15,7 +15,7 @@
 This is intended to be a short guide to help the installation and  execution of docsteady.
 
 
-\section{Installation}
+\section{Installation}\label{sec:install}
 
 Create a conda environment based on docsteady:
 
@@ -29,7 +29,7 @@ To use docsteady, activate the environment as follows:
 
 This environment will provide all dependencies that are required to build and run docsteady.
 
-It is recommended to use the provided conda environment also for development activities.
+It is recommended to use the provided conda environment also for development activities, see section \ref{sec:development}.
 
 Next release will make the distribution compatible with conda-forge. Future release should be provided in conda-forge channel instead of a private channel.
 
@@ -91,6 +91,27 @@ It should be possible to have the repository setup by sqrbot-jr (not available y
 
 
 \subsection{Verification Element Baseline generation}
-s
+
+
+\section{Development}
+\label{sec:development}
+
+Despite Docsteady is a pure python tool, it depends on \textbf{pandoc} that is a \texttt{c++} compiled library available only as conda package.
+
+Therefore, in order to fix the environment and ensure the expected behavior, it is important to set-up a consistent conda environment to use for development.
+The environment set-up is explained in section \ref{sec:install}.
+
+The source code of available at \url{https://github.com/lsst-dm/docsteady}.
+
+To test changes done locally in the source code, use the following procedure:
+
+\begin{itemize}
+\item (if not available) create the environment as specified in \ref{sec:install}
+\item activate the environment \texttt{conda activate docsteady-env}
+\item do your changes
+\item install the updates in the docsteady-dev environment: \texttt{python setup.py install}
+\item activate docteady-dev in a different terminal to update an existing document or to render a new one
+\end{itemize}
+
 
 \end{document}
