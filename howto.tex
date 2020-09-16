@@ -52,6 +52,9 @@ otherwise it is required to specify them from command line.
 
 \subsection{VCD genration}
 
+the VCD is generating extracting information from the Jira Database.
+Since the access to the Jira database is possible only from the Tucson network, it is required to be connected via VPN.
+
 \texttt{docsteady generate-vcd --sql True DM jira\_docugen.tex}
 
 The command extracts from Jira all information regarding \textbf{DM} and generate the file \texttt{jira\_docugen.tex}.
@@ -63,8 +66,6 @@ The VCD is generated accessing the database instead of using the REST API. There
 \item JIRA\_VCD\_USER
 \item JIRA\_VCD\_PASSWORD
 \end{itemize}
-
-In addition, since the access to the Jira database is possible only from the Tucson network, it is required to be connected via VPN.
 
 
 \subsection{Test Specification generation}
@@ -112,6 +113,19 @@ To test changes done locally in the source code, use the following procedure:
 \item install the updates in the docsteady-dev environment: \texttt{python setup.py install}
 \item activate docteady-dev in a different terminal to update an existing document or to render a new one
 \end{itemize}
+
+Each time a change is done in source code, in order to make it available in the environment, the following command has to be executed:
+
+\texttt{python setup.py install}
+
+from the docsteady root folder.
+
+
+\section{Documentation Procedure}
+\label{sec:docproc}
+
+Documents autogeneration may become very confusing if not done in a programatic way.
+Please consider the DM documentation approach as a guideline, summarized here.
 
 
 \end{document}
