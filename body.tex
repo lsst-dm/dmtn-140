@@ -1,12 +1,14 @@
 \section{Introduction}
 
-The Rubin Observatory Data Management subystem, as described in \textit{Juric et al}\cite{2015arXiv151207914J},
-comprises software, services, and systems that will automatically reduce the raw data to produce science-ready data products.
+In its first 10 years of observations, the Rubin Observatory will perform the Legacy Survey of Space and Time, as described
+in Ivezic et al\cite{2019ApJ...873..111I}. In the construction phase of the observatory, the Data Management subsystem,
+described in Juric et al\cite{2015arXiv151207914J}, is in charge of developing and preparing the
+software, services, and systems that will automatically reduce the raw data to produce science-ready data products.
 Project requirements on DM products are documented in change-controlled specifications. DM Verification and Validation activities
 are planned to guarantee that survey software and infrastructure both fulfill the system requirements
 and enable the science that motivates the project.
 
-In line with the verification approach adopted for the Gaia DPAC project, described in in \textit{Comoretto et al}\cite{10.1117/12.926797},
+In line with the verification approach adopted for the Gaia DPAC project, described in in Comoretto et al\cite{10.1117/12.926797},
 we present here the tooling and procedures used at Rubin Observatory for the documentation of verification and
 validation activities. Test activities are managed in Jira, where test cases are created and updated, and test results
 are reported. This ensures that all elements to be documented are available in one tool and that a history of
@@ -16,7 +18,7 @@ such as a lack of traceability, misspelling, duplication of content, and misalig
 centralized collection of information permits a high level of automation, where the extraction of test documents is
 achieved by a continuous integration process. This systematic approach substantially reduces the time required to
 produce verification and validation documentation, and its integration with the project's Systems Engineering model,
-detailed in \textit{Selvy et al}\cite{10.1117/12.2310125}, ensures full traceability to system requirements.
+detailed in Selvy et al\cite{10.1117/12.2310125}, ensures full traceability to system requirements.
 
 
 \section{The Verification and Validation Problem}
@@ -25,8 +27,8 @@ detailed in \textit{Selvy et al}\cite{10.1117/12.2310125}, ensures full traceabi
 The main scope of the verification and validation activity is to ensure that all requirements have been properly implemented and verified.
 This includes identifying the requirements, the affected components and the verification procedures.
 
-The Data Management requirements are baselined in the \textit{Data Management System Requirements}\cite{LSE-61}, also known as the DMSR.
-The DM requirements are flowed down from the \textit{LSST System Science Requirements Document} (SRD) \cite{LPM-17}. Interface requirements between DM and other LSST subsystems also have an impact on Data Management provided components and therefore need to be considered during Verification and Validation.
+The Data Management requirements are baselined in the Data Management System Requirements\cite{LSE-61}, also known as the DMSR.
+The DM requirements are flowed down from the LSST System Science Requirements Document (SRD) \cite{LPM-17}. Interface requirements between DM and other LSST subsystems also have an impact on Data Management provided components and therefore need to be considered during Verification and Validation.
 Figure \ref{fig:topdoctree} shows the flow down of high level requirements documents.
 
 \begin{figure}
@@ -64,7 +66,7 @@ Figure \ref{fig:vandvschema} shows the relationships between requirements, verif
 
 \section{The Approach}
 
-The verification and validation approach as illustrated in  \textit{Selvy et al}\cite{10.1117/12.2310125}  has been implemented.
+The verification and validation approach as illustrated in  Selvy et al\cite{10.1117/12.2310125}  has been implemented.
 Required tools like \textit{Syndeia} and \textit{Docsteady} have been put in place.
 Others tools used in the process described in \ref{sec:proc}, are also generally used in other project activities.
 
@@ -122,7 +124,7 @@ Whenever an author pushes changes to GitHub, a cloud-based continuous integratio
 (typically Travis CI) renders a pdf of the document and uploads it to \textbf{LSST the Docs}.
 
 \paragraph{LSST the Docs}
-is LSST's documentation hosting platform, see \textit{The LSST the Docs Platform for Continuous Documentation Delivery}\cite{SQR-006}.
+is LSST's documentation hosting platform, see The LSST the Docs Platform for Continuous Documentation Delivery\cite{SQR-006}.
 LSST the Docs hosts not only the accepted version of a document on its own subdomain of \texttt{lsst.io}, but also draft and
 historical versions corresponding to Git branches and tags.
 By publishing draft updates of documents in near-real-time, teams can collaborate and comment on documents without having to
@@ -152,13 +154,13 @@ As described early in this paper, a defined number of verification elements are 
 When first created, the verification elements have no description;
 the only information they contain is the details of requirement from which they were generated.
 They are synced to Jira using Syndeia, after which the validation scientist ensures that they are properly addressed.
-Figure  \ref{fig:vandvtools} gives a graphical overview of the process.
+Figure  \ref{fig:vandvproc} gives a graphical overview of the process.
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{imgs/VandVprocedure.png}
  \caption{Schematic overview of the V\&V procedure.}
- \label{fig:vandvtools}
+ \label{fig:vandvproc}
 \end{center}
 \end{figure}
 
@@ -322,7 +324,10 @@ The tooling also ensures that aspects such as traceability between tests and req
 or reusability of test cases are easy to implement and provide added value to the process.
 
 Finally, the verification control document provides a global overview of all DM requirements, ensuring we are not forgetting anything.
-This approach is not only used by DM, but also by other Rubin Observatory subsystems, that are facing the same challenge.
+This approach is not only used by DM, but also by other Rubin Observatory subsystems that are facing the same challenge.
 Using the same tools permit everybody to use the same template and have the same documentation format across the project.
 
+\acknowledgments
+This material is based on work supported in part by the  {National Science Foundation} through Cooperative Agreement 1258333 managed by the  {Association of Universities for Research in Astronomy} ({AURA}), and the  {Department of Energy} under  {Contract} No.  {DE}-AC02-76SF00515 with the  {SLAC} National Accelerator Laboratory. Additional LSST funding comes from private donations, grants to universities, and in-kind support from LSSTC Institutional Members.
 
+This research has made use of  NASA's Astrophysics Data System Bibliographic Services.
