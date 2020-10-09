@@ -83,7 +83,7 @@ The subsystems configured in the field \textit{Component} in Jira (October 2020)
 \item OCS
 \item PSE
 \item SAF
-\item T&S
+\item TS (T\&S)
 \end{itemize}
 
 
@@ -96,9 +96,9 @@ The folder organization in Jira shall correspond to the major components.
 
 The syntax to extract a test specification information is the following:
 
-\texttt{generate-spec "</tm4j_folder>" jira\_docugen.tex}
+\texttt{docsteady generate-spec "</tm4j\_folder>" jira\_docugen.tex}
 
-where \textit{</tm4j_folder>} shall be replaced by the exact folder where the test cases are defined in Jira, textit{Test Cases} tab.
+where \textit{</tm4j\_folder>} shall be replaced by the exact folder where the test cases are defined in Jira, textit{Test Cases} tab.
 For example, the command to extract the DM Acceptance test specification, LDM-639, is the following:
 
 \texttt{generate-spec "/Data Management/Acceptance|LDM-639" jira\_docugen.tex}
@@ -205,7 +205,7 @@ and the jobs to be configured are defined here:
 
 using a simple yaml file logic.
 
-Since the \textit{lsst-cocs-ci} service is behind a firewall, it the seeds job: 
+Since the \textit{lsst-docs-ci} service is behind a firewall, it the seeds job: 
 
 \url{https://lsst-docs-ci.ncsa.illinois.edu/jenkins/job/Service/job/seeding/}
 
