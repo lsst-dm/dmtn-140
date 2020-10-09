@@ -31,7 +31,8 @@ This environment will provide all dependencies that are required to build and ru
 
 It is recommended to use the provided conda environment also for development activities, see section \ref{sec:development}.
 
-Next release will make the distribution compatible with conda-forge. Future release should be provided in conda-forge channel instead of a private channel.
+Future release should be provided in conda-forge channel instead of a private channel.
+
 
 
 \section{Execution}
@@ -49,16 +50,21 @@ It is recommended to setup the following environment variables:
 
 otherwise it is required to specify them from command line.
 
+In order to execute the tool, with any of the syntaxes described in the following subsections, the corresponding conda environment providing docsteady shall be activated.
+
+
 
 \subsection{VCD genration}
 
-the VCD is generating extracting information from the Jira Database.
+A VCD is generating extracting information from the Jira Database.
 Since the access to the Jira database is possible only from the Tucson network, it is required to be connected via VPN.
+
+The following command extracts from Jira all information regarding \textbf{DM} and generate the file \texttt{jira\_docugen.tex}:
 
 \texttt{docsteady generate-vcd --sql True DM jira\_docugen.tex}
 
-The command extracts from Jira all information regarding \textbf{DM} and generate the file \texttt{jira\_docugen.tex}.
 This file is meant to be included in LDM-639.tex.
+This syntax assumes that the environment variables with the credentials to access the database have been exported in the shell where the command is executed.
 
 The VCD is generated accessing the database instead of using the REST API. Therefore the following environment variables should be specified:
 
@@ -67,18 +73,53 @@ The VCD is generated accessing the database instead of using the REST API. There
 \item JIRA\_VCD\_PASSWORD
 \end{itemize}
 
+In case you want to generate VCD for a different LSST/Rubin Observatory subsystem, for example the \textit{Camera} subsystem,
+just use the corresponding code configure in Jira, CAM, instead of DM.
 
-\subsection{Test Specification generation}
+The subsystems configured in the field \textit{Component} in Jira (October 2020) are:
+\begin{itemize}
+\item DM
+\item EPO
+\item OCS
+\item PSE
+\item SAF
+\item T&S
+\end{itemize}
 
 
-\subsection{Test Plan and Report generation}
+
+\subsection{Test Specification Generation}
+
+A test specification is extracted using REST API.
+All test included in a TM4J folder, including subfolders, are rendered in the same extraction.
+The folder organization in Jira shall correspond to the major components.
+
+The syntax to extract a test specification information is the following:
+
+\texttt{generate-spec "</tm4j_folder>" jira\_docugen.tex}
+
+where \textit{</tm4j_folder>} shall be replaced by the exact folder where the test cases are defined in Jira, textit{Test Cases} tab.
+For example, the command to extract the DM Acceptance test specification, LDM-639, is the following:
+
+\texttt{generate-spec "/Data Management/Acceptance|LDM-639" jira\_docugen.tex}
+
+Note that:
+\begin{itemize}
+\item the output \textit{jira\_docugen.tex} has to be included in the LDM-639.tex.
+\item the folder name in Jira, includes at the end the test specification identification code. This helps orienting in the folder structure
+\item an appendix with the traceability to the requirements is produced, \textit{jira\_docugen.appendix.tex}, to be included in included in the test specification.
+\end{itemize}
+
+
+
+\subsection{Test Plan and Report Generation}
 
 \texttt{docsteady generate-tpr LVV-P72 DMTR-231.tex --trace true}
 
 The command extract the information from Jira using REST API.
 Each test plan and report has to correspond to a Jira test plan (i.e. LVV-P72).
 The information is stored in a tex file, i.e. \texttt{DMTR-231.text}, that can be build directly.
-An appendix file is also created, in this case \texttt{DMTR-231.appenx.tex}.
+With the option: \textbf{--trace true}, an appendix file is also created, in this case \texttt{DMTR-231.appenx.tex}.
 
 However additional files is required.
 
@@ -88,7 +129,12 @@ However additional files is required.
 \item history\_and\_info.tex
 \end{itemize}
 
-It should be possible to have the repository setup by sqrbot-jr (not available yet).
+When creating the git repository using \textbf{sqrbot-jr}, all the requested files should already be present.
+
+In case you want to generate a test report for a different subsystem, you can specify the  namespace:
+
+\texttt{docsteady --namespace se generate-tpr LVV-P63 SCTR-14.tex}
+
 
 
 \subsection{Verification Element Baseline generation}
@@ -126,6 +172,45 @@ from the docsteady root folder.
 
 Documents autogeneration may become very confusing if not done in a programatic way.
 Please consider the DM documentation approach as a guideline, summarized here.
+
+\begin{itemize}
+\item Create an handler in DocuShare
+\item Create a repository in Github (using sqrbot-jr if available)
+\item Configure the continuous integrationas described in next Sec.~\ref{sec:ci}.
+\item Never auto-generate the document directly to master
+\item Render the document to a ticket branch, or to the \textbf{jira-sync} special branch
+\item Ensure that the document is correctly publish in the corresponding LSST The Docs landing page and that everybody who is interested in it can access.
+\item When a set of activities are completed, merge the branch to master using a PR. The R can be used to let contributors and stakeholders comment to the changes before merge.
+\item In case the special \textbf{jira-sync} branch is used, after merging it to master, I suggest to delete it  and recreate from the latest master.
+\end{itemize}
+
+
+
+\section{Continuous Integration}\label{sec:ci}
+
+The real added value of this tooling, is the capability to auto-generate continuously the documents from Jira.
+This is done using the Jenkins service available at:
+
+\url{https://lsst-docs-ci.ncsa.illinois.edu/jenkins/}
+
+This service is at the moment behind NCSA firewall, and therefore it requires VPN to access and monitor the jobs. However the otcome is available in the corresponding GitHub repositories and LSST The Docs landing pages.
+
+The docugen jobs are create using the seeds script defined at the following location:
+
+\url{https://github.com/docs-ci/docs-ci-seeds/blob/master/jobs/docugen_jobs.groovy}
+
+and the jobs to be configured are defined here:
+
+\url:{https://github.com/docs-ci/docs-ci-seeds/blob/master/etc/docugen.yaml}
+
+using a simple yaml file logic.
+
+Since the \textit{lsst-cocs-ci} service is behind a firewall, it the seeds job: 
+
+\url{https://lsst-docs-ci.ncsa.illinois.edu/jenkins/job/Service/job/seeding/}
+
+cannot be triggered just pushing to the seeds repository, but it requires to be executed manually.
+
 
 
 \end{document}
