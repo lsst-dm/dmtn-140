@@ -10,33 +10,30 @@ and enable the science that motivates the project.
 
 We present here the tooling and procedures used at the Rubin Observatory for the documentation of verification and validation activities.
 These are an evolution of the approach to verification and validation adopted by the Gaia Data Processing and Analysis Consortium (DPAC), described in Ref.~\citenum{10.1117/12.926797}.
-All test activities are managed using the Jira  issue tracking and project management tool. 
+All test activities are managed using the Jira issue tracking and project management tool. 
 Test cases are created and updated, and test results are reported using Jira. 
-This ensures that all elements to be documented (e.g., requirements, verification elements, etc) 
-are available in one tool and that their history is maintained.
-The system engineering model is synced with the Jira test framework, providing a direct link between
-tests and system requirements. Test documents can therefore be generated automatically, avoiding typical problems
-such as lack of traceability, typographical errors, duplication of content, and misalignment between documents. The
-centralized collection of information permits a high level of automation, where the extraction of test documents is
-achieved by a continuous integration process. This systematic approach substantially reduces the time required to
-produce verification and validation documentation, its integration with the project's system engineering model,
-detailed in Ref.~\citenum{10.1117/12.2310125}, and ensures full traceability to system requirements. 
-This approach becomes even more necessary if we look at the number of requirements that need to be verified and documented, 
-approximately 700 only for Data Management.
+This ensures that all elements to be documented (e.g. requirements, verification elements, etc) 
+are available through one tool, and that their history is maintained.
+The project's MagicDraw based systems engineering model is described in Ref.~\citenum{10.1117/12.2310125}. 
+The requirements definitions in MagicDraw are synced with the Jira test framework, providing a direct link between tests and system requirements.
+Test documents can therefore be generated automatically, avoiding typical problems such as a lack of traceability, typographical errors, duplication of content, and misalignment between documents. 
+The centralized collection of information permits a high level of automation, where the extraction of test documents is
+achieved by a continuous integration process. 
+This systematic approach substantially reduces the time required to produce verification and validation documentation, improves integration with the project's system engineering model, and ensures full traceability to system requirements.
+Such an approach is all the more necessary when considering the number of requirements that need to be verified and documented; approximately 700 only for Data Management.
 
-To complete the picture, a description of each document involved in the process is given. These documents are: 
-the \textit{Test Specification} documents to baseline the test cases, 
-the \textit{verification elements Baseline} documents to baseline the verification elements, 
-the \textit{Test Plan and Report} documents providing test campaign planning and reporting information,
-and the \textit{Verification Control Document} that, using the same approach and information already available in Jira, 
-becomes a useful document to measure internal progression and completion to the requirements coverage 
-and an important document to include in review's data pack. 
+To complete the picture, the following provides a description of each document involved in the process:
+\begin{itemize}
+\item  {\textit{Test Specification} documents to baseline the test cases, }
+\item {\textit{Verification Element Baseline} documents to baseline the verification elements,}
+\item  {\textit{Test Plan and Report} documents that provide test campaign planning and reporting information,}
+\item  {A \textit{Verification Control Document} that, using the same approach and information already available in Jira, becomes a useful document to summarize the  internal progression and completion to the requirements coverage, and an important document to present to funding agencies and at project reviews. }
+\end{itemize}
 
-In summary, Section \ref{sec:vandvproblem} introduce the Rubin Observatory Verification and Validation activities.
+The structure of this paper is as follows:  Section \ref{sec:vandvproblem} introduces the Rubin Observatory Verification and Validation activities.
 In Section \ref{sec:approach} we provide a description of the adopted approach, tools, documents, and procedures. 
-Section \ref{sec:vcd} introduces the Verification Control Document. 
+Section \ref{sec:vcd} details the Verification Control Document. 
 Finally in Section \ref{sec:conclusions} a few considerations on the implemented approach and outcomes are provided.
-
 
 \section{The Verification And Validation Context}
 \label{sec:vandvproblem}
