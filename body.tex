@@ -35,42 +35,33 @@ In Section \ref{sec:approach} we provide a description of the adopted approach, 
 Section \ref{sec:vcd} details the Verification Control Document. 
 Finally in Section \ref{sec:conclusions} a few considerations on the implemented approach and outcomes are provided.
 
-\section{The Verification And Validation Context}
+\section{Requirements Verification}
 \label{sec:vandvproblem}
-
-The purpose of the verification and validation activities is to ensure that all requirements have been properly implemented and verified.
-This includes identifying the requirements and deviations, the affected components, and the verification procedures.
-
-Figure \ref{fig:topdoctree} shows the flow down of high level requirements documents.
-The Data Management requirements are baselined in the Data Management System Requirements\cite{LSE-61}, also known as the DMSR.
-The DM requirements are flowed down from the System Science Requirements Document (SRD)\cite{LPM-17}. Interface requirements,
-between DM and other Rubin Observatory subsystems, also impact Data Management provided components and, therefore,
-need to be considered during Verification and Validation.
+The goal of verification and validation is to ensure that all requirements have been implemented according to specification, and where not, identifying deviations and non-conformances. 
+Figure \ref{fig:topdoctree} shows the flow down of requirements from high level requirements documents to each of the subsystems. 
+The Data Management subsystem requirements, which are flowed down from the LSST Science Requirements Document (SRD)\cite{LPM-17}, are baselined in the Data Management System Requirements document (DMSR), \cite{LSE-61}.
+Interface requirements between DM and other Rubin Observatory subsystems also impact Data Management delivered components and, therefore, need to be considered during Verification and Validation.
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{imgs/TopLevelDocTree.png}
- \caption{The Rubin Observatory top level document tree. In green the top-level requirements documents,
-in blue the LSST subsystem's requirements documents and in red the DM related interface requirements documents }
+ \caption{The Rubin Observatory top level document tree. The top-level requirements documents are in green, 
+ the LSST subsystem requirements documents in blue, and the DM related interface requirements documents in red. }
  \label{fig:topdoctree}
 \end{center}
 \end{figure}
 
-DM is responsible for both, fully verifying the DMSR requirements and contributing to the verification and validation of those interface requirements that have an impact on the DM subsystem.
-To achieve this, we create one or more verification elements for all requirements.
-These verification elements are assigned to the validation scientist,
-who will ensure they are properly described and are sufficient to fully verify the corresponding requirements.
-The validation scientist will also ensure that for each verification element there is at least one associated test case.
-In the case that the provided verification elements are not sufficient, the validation scientist will request additional verification elements to be associated with the requirement.
-In the opposite case, if a provided verification element is not needed, it will be removed.
-Figure \ref{fig:vandvschema} shows the relationships between requirements, verification elements, test cases and results.
+DM is responsible for both fully verifying the DMSR requirements and contributing to the verification and validation of those interface requirements that have an impact on the DM subsystem.
+To achieve this, we create one or more verification elements for each and every requirement. 
+These verification elements are assigned to the DM validation scientist who will ensure they are properly described and are sufficient to fully verify the corresponding requirements.
+The DM validation scientist will also ensure that for each verification element there is at least one associated test case.
+In the case that the initial set of verification elements are not sufficient to verify a requirement, the validation scientist will request additional verification elements to be associated with the requirement.
+Conversely, if an initial verification element is not needed, it will be removed.
+Figure \ref{fig:vandvschema} shows the relationship between requirements, verification elements, test cases and results.
 
-The verification and validation activities are organized into test campaigns, each of which is associated with one milestone\footnote{A 
-milestone is a set of functionality or activities, that are expected to be implemented or completed at a specific point in time. 
-In the context of V\&V, milestones are defined as Jira issues. Their definition and management is not in the scope of this paper.},
-The results of the test executions are collected in Jira and coverage information is propagated back to the verification elements and requirements in the system engineering model.
+All verification and validation activities are organized into test campaigns, each of which is associated with a single milestone\footnote{A milestone is a set of functionalities or activities, that are expected to be implemented or completed at a specific point in time. In the context of V\&V, milestones are defined as Jira issues. Their definition and management is not within the scope of this paper.},
+The results of the test executions are reported in Jira and coverage information is propagated back to the verification elements and requirements in the system engineering model.
 Test documents, including test reports, are generated automatically from Jira.
-
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{imgs/VandVSchema.png}
@@ -78,20 +69,17 @@ Test documents, including test reports, are generated automatically from Jira.
  \label{fig:vandvschema}
 \end{center}
 \end{figure}
-
-This approach ensures that all elements required for the tests are linked and available in Jira, 
-providing traceability and making possible to extract the necessary information into test documents without manual intervention.
+This approach ensures that all elements required for the tests are linked and available in Jira, providing traceability and making it possible to extract the necessary information into test documents without manual intervention.
 
 
-\section{TheVerification and Validation Approach}
+\section{The Verification and Validation Approach}
 \label{sec:approach}
 
-The verification and validation approach as illustrated in  Ref.~\citenum{10.1117/12.2310125}  has been implemented.
+The verification and validation processes, methodologies and tools as illustrated in  Ref.~\citenum{10.1117/12.2310125}  have been implemented.
 Required tools like \textit{Syndeia} and \textit{Docsteady} have been put in place.
 Others tools used in the process described in this section, are generally used in other project activities.
 
-
-\subsection{The Tools Used}
+\subsection{Tooling}
 
 \begin{figure}
 \begin{center}
@@ -101,9 +89,8 @@ Others tools used in the process described in this section, are generally used i
 \end{center}
 \end{figure}
 
-We provide in this subsection a short description for the tools involved in the Verification and Validation activity.
-Figure \ref{fig:vandvtools} provides a schematic overview of the tools, while
-Figure \ref{fig:overview}  shows a few screenshots of the tools as implemented at the Rubin Observatory.
+Figure \ref{fig:vandvtools} provides a schematic overview of the tools used as part of the Verification and Validation process. 
+Figure \ref{fig:overview}  shows a few screenshots of the tools as implemented at  Rubin Observatory.
 We can see how Verification and Validation information flows from Jira, where it is created and maintained,
 to the final document ready to be uploaded to DocuShare, the official Rubin Observatory documentation repository. 
 
@@ -134,7 +121,7 @@ It can be executed manually -- from the command line -- or automatically -- in a
 and generates the documents in \LaTeX~format.
 Using a CI system such as Jenkins, verification and validation documents can be generated continuously, or on a regular basis.
 The extracted \LaTeX~ code is managed in Git repositories.
-Docsteady is developed by the DM subsystem and the source code is available at \url{https://github.com/lsst-dm/docsteady}.
+Docsteady was developed by the DM subsystem and the source code is available at \url{https://github.com/lsst-dm/docsteady}.
 
 \paragraph{GitHub}
 is the platform used for software version management.
@@ -167,12 +154,11 @@ is the official Rubin Observatory documentation repository during construction.
 
 \subsection{Process Overview}\label{sec:proc}
 
-All Verification and Validation activities derive from the requirements.
+All Verification and Validation activities are driven by milestones, each of which describes the major DM functionality expected to be available and the associated list of requirements. 
 We assume in this document, that the requirements have been properly formalized, documented, and approved, 
 see Ref.~\citenum{10.1117/12.2310125}.
-As described early in this paper, a defined number of verification elements are created for each requirement.
-When first created, the verification elements have no description;
-the only information they contain is the details of the requirements from which they were generated.
+As described early in this paper, one or more verification elements are created for each requirement.
+When first created, the verification elements have no description; the only information they contain is the details of the requirements from which they were generated.
 They are synced to Jira using Syndeia, after which the validation scientist ensures that they are properly addressed.
 Figure  \ref{fig:vandvproc} gives a graphical overview of the process.
 
@@ -204,8 +190,8 @@ verification elements are baselined in a \textit{Verification Baseline Document}
 
 \subsubsection{Test Case Consolidation}
 
-The owner of each test case is responsible for completing it and providing in Jira all relevant information, like for example 
-the objective of test, the pre and post-conditions, and a the test procedure with the steps to execute during the test campaign.
+The owner of each test case is responsible for completing it and providing all relevant information in Jira , such as,  for example 
+the test objective, the pre- and post-conditions, and the test procedure including the steps to execute during the test campaign.
 Additional test cases can be created as needed. All test cases are related to a verification element in order to guarantee the traceability.
 In general, test cases can be associated with multiple verification elements, and therefore with more than one requirement.
 
@@ -220,8 +206,8 @@ As described in Section \ref{sec:vandvproblem} all test activities are organized
 For each test campaign, two \textit{TM4J} objects are created:
 
 \begin{itemize}
-\item \textbf{TM4J Test Plan} that provides the context of the test activity, and typically corresponds to a project milestone.
-\item \textbf{TM4J Test Cycle}(s) that provides the scope of a subset of tests to be executed. For each test campaign we may have multiple test cycles,
+\item \textbf{TM4J Test Plan}: provides the context of the test activity, and typically corresponds to a project milestone.
+\item \textbf{TM4J Test Cycle}(s): provides the subset of tests to be executed. For each test campaign we may have multiple test cycles,
 with different configurations, datasets, or extra conditions we may want to test. Each Test Cycle is traced
 to the TM4J Test Plan, and provides the list of test cases that need to be executed within that scope.
 \end{itemize}
@@ -237,12 +223,12 @@ Rubin Observatory does not instigate a formal Test Readiness Review for each tes
 however the tooling and procedures in place permit the person who is responsible for the test activity, and relevant stakeholders, 
 to assess and review the readiness of the activity before the execution of the tests.
 This is done by extracting the information into a document, the \textit{Test Plan and Report}, in GitHub, generating the pdf and making it available
-in the corresponding LSST the Docs landing page. The Product Owner\footnote{The Product Owner is in charge of a product and owns the outcome, ensuring it is in line with the requirements.}, contributors and stakeholders can easily access the document,
+in the corresponding LSST the Docs landing page. The Product Owner, contributors and stakeholders can easily access the document,
 check the content, and comment, ask for clarification, or request changes using the GitHub
 Pull Request (PR) mechanism or the corresponding Jira issue. 
 When agreement has been reached, the TM4J Test Plan status is changed to \textbf{Approved} to indicate the test activity is ready to start.
 
-The approved \textit{Test Plan and Report} document resulting at the end of this first phase, has to be uploaded to DocuShare 
+The approved \textit{Test Plan and Report} document resulting at the end of this first phase, is uploaded to DocuShare 
 and used as a reference for the next phase. The document at this stage provides the agreed test procedures and all the necessary 
 information required to execute the tests.
 
@@ -258,15 +244,14 @@ Once the test execution is complete, an overall assessment must be provided in t
 As in the previous phase, the document is generated automatically from Jira and provides an easy way to access the test campaign information.
 Product owner, contributors and stakeholders can review the outcome of the test campaign 
 using the same GitHub PR mechanism reported above, commenting, asking for more information, or changes if required.
-Finally, the Product Owner is in charge of approving the test campaign result, when they considers that the collected information is complete.
+Finally, the Product Owner has the final sign-off on the results of the test campaign.
 
 The \textit{TM4J} Test Plan status will then be changed to \textbf{Done}.
 At the end of the test campaign, the  final \textit{Test Plan and Report} is issued and uploaded to DocuShare.
 We can assume that, in special cases, the document can be used to document further executions in the context of the same test campaign.
-For example, in the case the test campaign verifies a specific software release, a future patch on that software release can be tested
+For example, if the test campaign verifies a specific software release, a future patch on that software release can be tested
 with the addition of a specific Test Cycle to the \textit{TM4J} Test Plan.
 However, future test campaigns related to different milestones will be documented in a different document.
-
 
 \subsection{Test Documents}
 
@@ -352,7 +337,7 @@ much more accessible to the users and stakeholders.
 The tooling also ensures that aspects such as traceability between tests and requirements, homogeneity of the information
 or reusability of test cases are easy to implement and provide added value to the process.
 
-Finally, the VCD provides a global overview of all DM requirements, ensuring all DM direct and interfacing requirements are covered.
+Finally, the VCD provides a global overview of all DM requirements, ensuring all DM direct and interface requirements are covered.
 
 This approach is not only used by DM, but also by other Rubin Observatory subsystems that are facing the same challenge.
 The VCD for the time being is only provided by DM, but the tooling and procedure are ready to serve all other Rubin Observatory subsystems.
