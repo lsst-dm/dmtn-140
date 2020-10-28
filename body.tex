@@ -39,7 +39,7 @@ Finally in Section \ref{sec:conclusions} a few considerations on the implemented
 \label{sec:vandvproblem}
 The goal of verification and validation is to ensure that all requirements have been implemented according to specification, and where not, identifying deviations and non-conformances. 
 Figure \ref{fig:topdoctree} shows the flow down of requirements from high level requirements documents to each of the subsystems. 
-The Data Management subsystem requirements, which are flowed down from the LSST Science Requirements Document (SRD)\cite{LPM-17}, are baselined in the Data Management System Requirements document (DMSR), \cite{LSE-61}.
+The Data Management subsystem requirements, which are flowed down from the LSST Science Requirements Document (SRD)\cite{LPM-17}, are baselined in the Data Management System Requirements document (DMSR) \cite{LSE-61}.
 Interface requirements between DM and other Rubin Observatory subsystems also impact Data Management delivered components and, therefore, need to be considered during Verification and Validation.
 
 \begin{figure}
@@ -54,7 +54,6 @@ Interface requirements between DM and other Rubin Observatory subsystems also im
 DM is responsible for both fully verifying the DMSR requirements and contributing to the verification and validation of those interface requirements that have an impact on the DM subsystem.
 To achieve this, we create one or more verification elements for each and every requirement. 
 These verification elements are assigned to the DM validation scientist who will ensure they are properly described and are sufficient to fully verify the corresponding requirements.
-The DM validation scientist will also ensure that for each verification element there is at least one associated test case.
 In the case that the initial set of verification elements are not sufficient to verify a requirement, the validation scientist will request additional verification elements to be associated with the requirement.
 Conversely, if an initial verification element is not needed, it will be removed.
 Figure \ref{fig:vandvschema} shows the relationship between requirements, verification elements, test cases and results.
@@ -159,7 +158,7 @@ We assume in this document, that the requirements have been properly formalized,
 see Ref.~\citenum{10.1117/12.2310125}.
 As described early in this paper, one or more verification elements are created for each requirement.
 When first created, the verification elements have no description; the only information they contain is the details of the requirements from which they were generated.
-They are synced to Jira using Syndeia, after which the validation scientist ensures that they are properly addressed.
+They are synced to Jira using Syndeia, after which the validation scientist or a designee ensures that they are properly addressed, as already mentioned in section \ref{sec:vandvproblem}.
 Figure  \ref{fig:vandvproc} gives a graphical overview of the process.
 
 \begin{figure}
@@ -175,9 +174,7 @@ The following subsections describe the main steps of the verification and valida
 
 \subsubsection{Verification Elements Analysis}
 
-The first activity required before starting with any test campaign, is to ensure that each verification element 
-is complete and contains all the relevant information.
-This is done by the validation scientist, or designee.
+The first activity required before starting with any test campaign, is to ensure that each verification element is fully described.
 
 In this phase, the verification elements shall be completed with the following information:
 \begin{itemize}
@@ -185,7 +182,7 @@ In this phase, the verification elements shall be completed with the following i
 \item one or more draft test cases, each of which are defined with a one-sentence objective and an owner. 
 In this way each test case is automatically traced to a verification element and therefore to a requirement.
 \end{itemize}
-verification elements are baselined in a \textit{Verification Baseline Document}.
+Verification elements are baselined in a \textit{Verification Baseline Document}.
 
 
 \subsubsection{Test Case Consolidation}
