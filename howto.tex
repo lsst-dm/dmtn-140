@@ -25,7 +25,7 @@ Ensure that the conda configuration file  \texttt{.condarc} does not include the
 
 To use docsteady, activate the environment as follows:
 
-\texttt{conda activate docsteady-dev}
+\texttt{conda activate docsteady-env}
 
 This environment will provide all dependencies that are required to build and run docsteady.
 
@@ -139,6 +139,39 @@ In case you want to generate a test report for a different subsystem, you can sp
 
 \subsection{Verification Element Baseline generation}
 
+Verification Elements (VE) are Jira issues in the LVV Jira project, of type \texttt{Verification}.
+They are categorized in Components (DM, SITCOM, etc) and Sub-Componenst.
+
+A VE baseline document is extracted using REST API.
+All VE associated with a Jira Component or Sub-Component, if specified, are rendered in the same extraction.
+
+The syntax to extract a VE baseline information is the following:
+
+\texttt{docsteady baseline-ve <COMPONENT> <SUB-COMPONENT> jira_docugen.tex [--details true]}
+
+The informatino is saved in a file colled \texttt{jira_docugen.tex}. You may choose a different name.
+This file has to be included in a Latex document, where the corresponding information about the Component and Sub-Component is provided.
+
+If the option \texttt{--details true} is provided, an extra technical note is generated, with including all test case details.
+
+
+\subsubsection{Sub-Components}
+
+Ideally, Sub-Comonents are matted to the major products of an organization. 
+The shall also be mapped to the product tree defined in the model.
+
+In DM, trying to find a good balance between details and practicity the following components have been defined:
+
+\begin{itemize}
+\item Science
+\item Service
+\item Network
+\item Infrastructure
+\end{itemize}
+
+For each of these subcomponents, a different VE baseline document is extracted.
+
+
 
 \section{Development}
 \label{sec:development}
@@ -175,7 +208,7 @@ Please consider the DM documentation approach as a guideline, summarized here.
 
 \begin{itemize}
 \item Create an handler in DocuShare
-\item Create a repository in Github (using sqrbot-jr if available)
+\item Create a repository in Github (using sqrbot-jr)
 \item Configure the continuous integrationas described in next Sec.~\ref{sec:ci}.
 \item Never auto-generate the document directly to master
 \item Render the document to a ticket branch, or to the \textbf{jira-sync} special branch
@@ -193,7 +226,11 @@ This is done using the Jenkins service available at:
 
 \url{https://lsst-docs-ci.ncsa.illinois.edu/jenkins/}
 
-This service is at the moment behind NCSA firewall, and therefore it requires VPN to access and monitor the jobs. However the otcome is available in the corresponding GitHub repositories and LSST The Docs landing pages.
+This service is at the moment behind NCSA firewall, and therefore it requires VPN to access and monitor the jobs.
+Authentication to this Jenkins instance is manage via OATH.
+To permit a user to access the repository, it need to have access as a member to the \texttt{docs-ci} GitHub organization.
+
+The rendered documents are available in the corresponding GitHub repositories and LSST The Docs landing pages.
 
 The docugen jobs are create using the seeds script defined at the following location:
 
