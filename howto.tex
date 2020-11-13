@@ -49,6 +49,7 @@ It is recommended to setup the following environment variables:
 \end{itemize}
 
 otherwise it is required to specify them from command line.
+Personal Jira credential can be used.
 
 In order to execute the tool, with any of the syntaxes described in the following subsections, the corresponding conda environment providing docsteady shall be activated.
 
@@ -63,7 +64,7 @@ The following command extracts from Jira all information regarding \textbf{DM} a
 
 \texttt{docsteady generate-vcd --sql True DM jira\_docugen.tex}
 
-This file is meant to be included in LDM-639.tex.
+The generated file \textbf{jira\_docugen.tex} is meant to be included in LDM-692.tex.
 This syntax assumes that the environment variables with the credentials to access the database have been exported in the shell where the command is executed.
 
 The VCD is generated accessing the database instead of using the REST API. Therefore the following environment variables should be specified:
@@ -147,9 +148,9 @@ All VE associated with a Jira Component or Sub-Component, if specified, are rend
 
 The syntax to extract a VE baseline information is the following:
 
-\texttt{docsteady baseline-ve <COMPONENT> <SUB-COMPONENT> jira_docugen.tex [--details true]}
+\texttt{docsteady baseline-ve <COMPONENT> <SUB-COMPONENT> jira\_docugen.tex [--details true]}
 
-The informatino is saved in a file colled \texttt{jira_docugen.tex}. You may choose a different name.
+The informatino is saved in a file colled \texttt{jira\_docugen.tex}. You may choose a different name.
 This file has to be included in a Latex document, where the corresponding information about the Component and Sub-Component is provided.
 
 If the option \texttt{--details true} is provided, an extra technical note is generated, with including all test case details.
@@ -186,7 +187,7 @@ The source code of available at \url{https://github.com/lsst-dm/docsteady}.
 To test changes done locally in the source code, use the following procedure:
 
 \begin{itemize}
-\item (if not available) create the environment as specified in \ref{sec:install}
+\item (if not available) create the environment as specified in section \ref{sec:install}
 \item activate the environment \texttt{conda activate docsteady-env}
 \item do your changes
 \item install the updates in the docsteady-dev environment: \texttt{python setup.py install}
@@ -242,11 +243,17 @@ and the jobs to be configured are defined here:
 
 using a simple yaml file logic.
 
-Since the \textit{lsst-docs-ci} service is behind a firewall, it the seeds job: 
+The seeds
 
 \url{https://lsst-docs-ci.ncsa.illinois.edu/jenkins/job/Service/job/seeding/}
 
-cannot be triggered just pushing to the seeds repository, but it requires to be executed manually.
+will detect the changes in the repository and recreate the Jenkins job.
+
+\subsection{Autentication}
+
+The access to \url{https://lsst-docs-ci.ncsa.illinois.edu/jenkins} is granted adding users to the docs-ci organization.
+
+The required credentials to access Jira REST API and database are stored in \textit{1password.com}, LSST-IT architecture vault.
 
 
 
