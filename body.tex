@@ -20,7 +20,7 @@ Test documents can therefore be generated automatically, avoiding typical proble
 The centralized collection of information permits a high level of automation, where the extraction of test documents is
 achieved by a continuous integration process. 
 This systematic approach substantially reduces the time required to produce verification and validation documentation, improves integration with the project's system engineering model, and ensures full traceability to system requirements.
-Such an approach is all the more necessary when considering the number of requirements that need to be verified and documented; approximately 700 only for Data Management.
+Such an approach is all the more necessary when considering the number of requirements that need to be verified and documented; approximately 700 for Data Management alone.
 
 To complete the picture, the following provides a description of each document involved in the process:
 \begin{itemize}
@@ -38,9 +38,9 @@ In closing, a few considerations on the implemented approach and outcomes are di
 
 \section{Requirements Verification}
 \label{sec:vandvproblem}
-The goal of verification and validation is to ensure that all requirements have been implemented according to specification, and where not, identifying deviations and non-conformances. 
+The goal of verification and validation is to ensure that all requirements have been implemented according to specification, and where not, identify deviations and non-conformances. 
 Figure \ref{fig:topdoctree} shows the flow down of requirements from high level requirements documents to each of the subsystems. 
-The Data Management subsystem requirements, which are flowed down from the LSST Science Requirements Document (SRD)\cite{LPM-17}, are baselined in the Data Management System Requirements document (DMSR) \cite{LSE-61}.
+The Data Management subsystem requirements, which are flowed down from the LSST Observatory System Specifications (OSS) \cite{LSE-30}, are baselined in the Data Management System Requirements document (DMSR) \cite{LSE-61}.
 Interface requirements between DM and other Rubin Observatory subsystems also impact Data Management delivered components and, therefore, need to be considered during Verification and Validation.
 
 \begin{figure}
@@ -116,12 +116,11 @@ via a mapping between the fields in MagicDraw and the fields in Jira, utilizing 
 After the test activity is completed, the information will be synced back to MagicDraw.
 
 \paragraph{Docsteady}
-is the tool that generates the test documents, extracting the information from Jira using the REST API.
-It can be executed manually -- from the command line -- or automatically -- in a continuous integration (CI) tool --
-and generates the documents in \LaTeX~format.
+developed by the DM subsystem, is the tool that generates the test documents, extracting the information from Jira using the REST API.
+It can be executed manually -- from the command line -- or automatically -- in a continuous integration (CI) tool -- and generates the documents in \LaTeX~format.
 Using a CI system such as Jenkins, verification and validation documents can be generated continuously, or on a regular basis.
-The extracted \LaTeX~ code is managed in Git repositories.
-Docsteady was developed by the DM subsystem and the source code is available at \url{https://github.com/lsst-dm/docsteady}.
+The extracted \LaTeX~ code is managed in Git repositories, one for each document.
+Docsteady's source code is available at \url{https://github.com/lsst-dm/docsteady}.
 
 \paragraph{GitHub}
 is the platform used for software version management.
@@ -141,7 +140,7 @@ To specifically publish pdf documents, we run a tool within the continuous integ
 that generates an HTML landing page for the pdf based on metadata extracted from the document's source.
 
 \paragraph{DocuShare}
-is the official Rubin Observatory documentation repository during construction.
+is the official Rubin Observatory documentation for the construction project.
 
 \begin{figure}
 \begin{center}
@@ -324,8 +323,8 @@ Figure \ref{fig:vcddetail} shows a detail example extracted from the DM VCD.
 \section{Conclusions and Outlook}
 \label{sec:conclusions}
 
-In the context of a large project like Rubin Observatory construction, with a large number of requirements
-and subsystems/components, the presented approach shows how integrating custom tools like Docsteady
+In the context of a large project such as the Rubin Observatory construction project, with a large number of requirements,
+ subsystems and components, the presented approach shows how integrating custom tools like Docsteady
 and Syndeia into the existing infrastructure significantly reduces the effort
 required to produce verification and validation documentation.
 This permits the team to concentrate on the relevant test activities, maximizing the scientific outcome.
@@ -335,11 +334,11 @@ much more accessible to the users and stakeholders.
 The tooling also ensures that aspects such as traceability between tests and requirements, homogeneity of the information
 or reusability of test cases are easy to implement and provide added value to the process.
 
-Finally, the VCD provides a global overview of all DM requirements, ensuring all DM direct and interface requirements are covered.
+Finally, the VCD provides a global overview of the verification status of all DM requirements, ensuring all DM direct and interface requirements are covered.
 
 This approach is not only used by DM, but also by other Rubin Observatory subsystems that are facing the same challenge.
-The VCD for the time being is only provided by DM, but the tooling and procedure are ready to serve all other Rubin Observatory subsystems.
-Using the same tools permit everybody to use the same template and have the same documentation format across the project.
+The VCD for the time being is only provided by DM, but the tooling and procedures are ready to be used by all other Rubin Observatory subsystems.
+Using the same tools permits everybody to use the same template and have the same documentation format across the project.
 
 
 \acknowledgments
