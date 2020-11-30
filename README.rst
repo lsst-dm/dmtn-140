@@ -1,7 +1,7 @@
 .. image:: https://img.shields.io/badge/dmtn--140-lsst.io-brightgreen.svg
    :target: https://dmtn-140.lsst.io
-.. image:: https://travis-ci.com/lsst-dm/dmtn-140.svg
-   :target: https://travis-ci.com/lsst-dm/dmtn-140
+.. image:: https://github.com/lsst-dm/DMTN-140/workflows/CI/badge.svg
+   :target: https://github.com/lsst-dm/DMTN-140/actions/
 
 #############################################################################
 Documentation automation for the Verification and Validation of LSST software
