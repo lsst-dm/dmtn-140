@@ -38,11 +38,11 @@ The anaconda \texttt{lsst-dm} channel could however be a more flexible alternati
 
 \section{Execution}
 
-It is recommended to set up the following environment variables:
+It is recommended to provide the credentials seting up the following environment variables:
 
 \begin{itemize}
-\item \texttt{JIRA\_USER}
-\item \texttt{JIRA\_PASSWORD}
+\item \texttt{export JIRA\_USER=<jira-username>}
+\item \texttt{export JIRA\_PASSWORD=<password>}
 \end{itemize}
 
 otherwise, it is required to specify them from the command line using the \texttt{--username} and \texttt{--password} options.
@@ -53,14 +53,14 @@ For CI purposes, a general set of credentials are available, as specified in sec
 
 In order to execute any of the docsteady commands described in the following subsections, a conda environment providing docsteady shall be activated, as described in section \ref{sec:install}.
 
-Use \texttt{--help} to get the list of available option for each of the documented docsteady command.
+Use \texttt{--help} to get the list of available options for each of the docsteady commands.
 In addition, existing documents generated using docsteady, have a \texttt{.docugen} file with the command to be executed in CI, which can be used as an example.
 
 
 
 \subsection{Test Specification Generation}
 
-A test specification is extracted using REST API.
+Test specifications are extracted using REST API.
 All tests cases included in a TM4J folder, including subfolders, are rendered in the same extraction.
 The folder organization in Jira should correspond to the major subsystem components, and modeled in MagicDraw.
 
@@ -68,16 +68,16 @@ The syntax to extract a test specification is the following:
 
 \texttt{docsteady generate-spec "</tm4j\_folder>" jira\_docugen.tex}
 
-where \textit{</tm4j\_folder>} shall be replaced by the exact folder where the test cases are defined in the Jira \texttt{Test Cases} tab.
+where \texttt{</tm4j\_folder>} shall be replaced by the exact folder where the test cases are defined in the Jira \texttt{Test Cases} tab.
 For example, the command to extract the DM Acceptance test specification, LDM-639, is the following:
 
-\texttt{docsteady generate-spec "/Data Management/Acceptance|LDM-639" [ira\_docugen.tex]}
+\texttt{docsteady generate-spec "/Data Management/Acceptance|LDM-639" [jira\_docugen.tex]}
 
 Note that:
 \begin{itemize}
-\item the output file \textit{jira\_docugen.tex} is optional in the execution of docsteady, but required in this case in order to include the extracted information in a \LaTeX~test specification document (i.e. LDM-639.tex). If omitted, the docsteady  output will just be printed in the terminal;
-\item the folder name in Jira, includes at the end the test specification document hndler. This is a best practice to use when organizing test cases in Jira, it helps to orient in the folder structure;
-\item an appendix with the traceability to the requirements is produced in the file \textit{jira\_docugen.appendix.tex}, to be included also in the test specification tex file. 
+\item the output file \textit{jira\_docugen.tex} is optional in the execution of docsteady, but required in this context in order to include the extracted information in a \LaTeX~document (i.e. LDM-639.tex). If omitted, the docsteady  output will just be printed in the terminal;
+\item the folder name in Jira includes at the end the test specification document handler. This is a best practice to use when organizing test cases in Jira, it helps to orientate in the folder structure;
+\item an appendix with the traceability to the requirements is produced in the file \textit{jira\_docugen.appendix.tex}, to be included in the test specification tex file. 
 \end{itemize}
 
 See LDM-639 Git repository as an example.
@@ -94,12 +94,11 @@ Where:
 \begin{itemize}
 \item \texttt{LVV-PXX} is the TM4J object that describes the test campaign, for example \texttt{LVV-P72};
 \item \texttt{file.tex} is the Test Plan and Report tex file where the document will be rendered, for example \texttt{DMTR-231.tex};
-\item \texttt{--trace true} (optional) generates an appending with the traceability information.
+\item \texttt{--trace true} (optional) generates an appendix with the traceability information.
 \end{itemize}
 
-Each TM4J test plan and related information in Jira, is rendered in a different Test Plan and Report document.
-For example \texttt{LVV-P72} is rendered in \texttt{DMTR-231.tex}.
-The Test Plan and Report filename usually corresponds also to the document handler in Docushare.
+Each TM4J test plan and related information in Jira is rendered in a different Test Plan and Report document,
+which filename usually corresponds also to the document handler in Docushare.
 
 The generated file can be built directly into the corresponding pdf, however additional files are required.
 
@@ -124,7 +123,7 @@ Valid namespaces are:
 \item TS: Telescope \& Site
 \end{itemize}
 
-See DMTR-231 or SCTR-14 Git repositories as an example.
+See SCTR-14 or DMTR-231 Git repositories as an example.
 
 
 
@@ -140,7 +139,7 @@ The syntax to extract a VE baseline information is the following:
 
 \texttt{docsteady baseline-ve <COMPONENT> <SUB-COMPONENT> jira\_docugen.tex [--details true]}
 
-The information is saved in the specified \texttt{jira\_docugen.tex} file. You may choose a different name, or print the output on the terminal if omitted.
+The information is saved in the specified \texttt{jira\_docugen.tex} file.
 This file has to be included in a \LaTeX~document, where the corresponding context about the Component and Sub-Component is provided.
 
 If the option \texttt{--details true} is provided, an extra technical note is generated, including all test case details.
@@ -153,7 +152,7 @@ See LDM-732 Git repository as an example.
 Ideally, Sub-Components are matched to the major products of a LSST/Rubin subsystem. 
 They should also be mapped to the product tree defined in the MagicDraw model.
 
-In DM, trying to find a good balance between details and practice, the following components have been defined:
+In DM, trying to find a good balance between details and practice, the following components have been defined, in agreement with the DM scientist leader:
 
 \begin{itemize}
 \item Science
@@ -180,30 +179,29 @@ Section \ref{sec:auth} explains where to find the full credentials details.
 For your convenience, the credentials can be specified in the following environment variables:
 
 \begin{itemize}
-\item \texttt{JIRA\_VCD\_USER=jiraro}
-\item \texttt{JIRA\_VCD\_PASSWORD} (see section \ref{sec:auth})
-\item \texttt{JIRA\_DB=140.252.201.12}
+\item \texttt{export JIRA\_VCD\_USER=jiraro}
+\item \texttt{export JIRA\_VCD\_PASSWORD} (see section \ref{sec:auth})
+\item \texttt{export JIRA\_DB=140.252.201.12}
 \end{itemize}
 
 otherwise, it is required to specify them from the command line using the options \texttt{--vcduser}, \texttt{--vcdpwd}, and \texttt{--jiradb}.
 In case credential options are omitted and no environment variables are defined, they will be prompted interactively.
 Note also that the Jira database IP address may change. Updated information are maintained in the vault specified in section \ref{sec:auth}.
 
-The following command extracts from Jira all VCD information regarding \textbf{DM} and generates the file \texttt{jira\_docugen.tex}:
+The following command extractsall VCD information regarding \textbf{DM} and generates the file \texttt{jira\_docugen.tex}:
 
 \texttt{docsteady generate-vcd --sql True DM jira\_docugen.tex}
 
 The generated file \textbf{jira\_docugen.tex} is meant to be included in LDM-692.tex.
 
-In case you want to generate VCD for a different LSST/Rubin Observatory subsystem VCD,
+In case you want to generate the VCD for a different LSST/Rubin Observatory subsystem VCD,
 just use the corresponding subsystem code configured in the Jira \textbf{component} field, which are currently (October 2020):
 
 \begin{itemize}
-\item DM
 \item EPO
 \item OCS
 \item PSE
-\item TS (T\&S)
+\item TS (for T\&S)
 \end{itemize}
 
 
@@ -224,16 +222,13 @@ To test changes done locally in the source code, use the following procedure:
 \begin{itemize}
 \item (if not available) create the environment as specified in section \ref{sec:install}
 \item activate the environment: \texttt{conda activate docsteady-env}
+\item clone docsteady repository and checkout a ticket branch
 \item do your changes
 \item install the updates in the docsteady-env environment: \texttt{python setup.py install}
-\item activate the same docsteady-env environment in a different terminal to test the new changed.
+\item activate the same docsteady-env environment in a different terminal to test the new changed
+\item once the changes are OK, commit them in the repository and open a PR for merging the branch to master
 \end{itemize}
 
-Each time a change is done in the source code, in order to make it available in the environment, the following command has to be executed:
-
-\texttt{python setup.py install}
-
-from the docsteady root folder.
 
 
 \section{Documentation Procedure}
@@ -271,7 +266,8 @@ The docugen jobs are created using the seeds script defined at the following loc
 
 \url{https://github.com/docs-ci/docs-ci-seeds/blob/master/jobs/docugen_jobs.groovy}
 
-and the jobs are configured in the following YAML file:
+There should be no need to change this script, unless problems are found in its logic, or improvements need to be implemented
+The jobs are configured in the following YAML file:
 
 \url{https://github.com/docs-ci/docs-ci-seeds/blob/master/etc/docugen.yaml}
 
@@ -285,7 +281,8 @@ will detect the changes in the YAML configuration file and create/update the the
 
 \subsection{Authentication}\label{sec:auth}
 
-The access to \url{https://lsst-docs-ci.ncsa.illinois.edu/jenkins} is granted adding users to the \textbf{docs-ci} GitHub organization.
+The access to \url{https://lsst-docs-ci.ncsa.illinois.edu/jenkins} is granted adding users to the \textbf{docs-ci} GitHub organization, 
+managed by DM Architecture team.
 
 Two generic set of credentials to access Jira REST API and the Jira database have been defined.
 These credentials are available at \texttt{1password.com}, in the LSST-IT architecture vault, but not yet integrated into docsteady.
