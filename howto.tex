@@ -137,17 +137,25 @@ All VE associated with a Jira Component or Sub-Component, if specified, are rend
 
 The syntax to extract a VE baseline information is the following:
 
-\texttt{docsteady baseline-ve <COMPONENT> <SUB-COMPONENT> jira\_docugen.tex [--details true]}
+\texttt{docsteady [--namespace <CMP>] baseline-ve [--subcomponent <SUBC>] jira\_docugen.tex [--details true]}
 
 The information is saved in the specified \texttt{jira\_docugen.tex} file.
 This file has to be included in a \LaTeX~document, where the corresponding context about the Component and Sub-Component is provided.
+
+The \texttt{--namespace <CMP>} option identifies the Jira component from which to extract the information.
+The parameter \texttt{CMP} shall correspond to the Rubin Observatory sub-systems.
+See the See subsection \ref{sec:components} for the complete list of components.
+If omitted, the DM component is selected by default.
+
+The \texttt{--subcomponent <SUBC>} is optional. If omitted all verification elements of the specified component will be extracted. 
+See \ref{sec:subcomp} for the description of the DM subcomponents.
 
 If the option \texttt{--details true} is provided, an extra technical note is generated, including all test case details.
 
 See LDM-732 Git repository as an example.
 
 
-\subsubsection{Sub-Components}
+\subsubsection{Sub-Components}\label{sec:subcomp}
 
 Ideally, Sub-Components are matched to the major products of a LSST/Rubin subsystem. 
 They should also be mapped to the product tree defined in the MagicDraw model.
@@ -190,20 +198,31 @@ Note also that the Jira database IP address may change. Updated information are 
 
 The following command extractsall VCD information regarding \textbf{DM} and generates the file \texttt{jira\_docugen.tex}:
 
-\texttt{docsteady generate-vcd --sql True DM jira\_docugen.tex}
+\texttt{docsteady [--namespace <COM>] generate-vcd --sql True jira\_docugen.tex}
 
+When no \texttt{--namespace if provided}, the DM component is selected by default.
 The generated file \textbf{jira\_docugen.tex} is meant to be included in LDM-692.tex.
 
 In case you want to generate the VCD for a different LSST/Rubin Observatory subsystem VCD,
-just use the corresponding subsystem code configured in the Jira \textbf{component} field, which are currently (October 2020):
+just use the corresponding subsystem code configured in the Jira \textbf{component} field. 
+See next subsection \ref{sec:components} for the complete list.
+
+
+\subsection{Components - Sub-systems}\label{sec:components}
+
+Follows the list of components configured for the Jira LVV project.
+Each component corresponds to a Rubin Observatory Construction subsystem.
 
 \begin{itemize}
-\item EPO
-\item OCS
-\item PSE
-\item TS (for T\&S)
+\item \textbf{CAM}: Camera
+\item \textbf{DM}: Data Management, the default component for all docsteady commands.
+\item \textbf{EPO}: Education and Public Outreach
+\item \textbf{OCS}: Observatory Control System
+\item \textbf{PSE}: Project System Engineering, used for Commisioning (SitCom)
+\item \textbf{T\&S}: Telescope and Site
 \end{itemize}
 
+In case the subcomponent specified is "None", all VE without subcomponent will be extracted.
 
 
 \section{Development}
