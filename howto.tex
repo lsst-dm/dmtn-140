@@ -85,6 +85,10 @@ See LDM-639 Git repository as an example.
 
 \subsection{Test Plan and Report Generation}
 
+\textbf{Important}: before extracting a test plan and report using docsteady,
+the corresponding document handler has to be added in the \texttt{Document ID} field in the Jira test plan object.
+This ensures that the Verification Control Document will include this information.
+
 The following command extracts a Test Plan and Report using Jira REST API:
 
 \texttt{docsteady generate-tpr <LVV-PXX> <file.tex> [--trace true]}
